@@ -31,13 +31,12 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                     google={this.props.google}
                     onClick={this.onMapClicked}
                     initialCenter={{
-                        lat: 53.0241916,
-                        lng: -2.1915053
+                        lat: 53.0229395,
+                        lng: -2.1803406
                       }}
                     zoom={12}
                     >
-                  <Marker onClick={this.onMarkerClick}
-                          name={'Current location'} />
+                  
                    <Marker
                         onClick={this.onMarkerClick}
                         name={'Potteries Museum & Art Gallery'}

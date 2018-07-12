@@ -1,16 +1,29 @@
 import React, { Component } from 'react';
 import GoogleMaps from './components/GoogleMaps.js'
+import SearchBox from './components/Sidebar'
 import './App.css';
 
 class App extends Component {
+
+  state = {
+    query: ''
+  }
+
+  filterPlaces = (val) => {
+    this.setState({query: val})
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-         
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <GoogleMaps />
+      <div className='container'>
+         <div className='search-box'>
+        <h1>Potteries Museums</h1>
+        <SearchBox 
+        query={this.state.query}
+        filter={this.filterPlaces}
+        />
+        </div>
+        <GoogleMaps id='map'/>
       </div>
     );
   }
