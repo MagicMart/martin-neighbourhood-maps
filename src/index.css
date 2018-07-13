@@ -6,6 +6,10 @@ html,
         padding: 0;
       }
 
+      * {
+        border: 1px solid red !important;
+     }
+
       .container {
         display: flex;
         flex-wrap: nowrap;
@@ -36,7 +40,7 @@ html,
         right: 0px;
       }
 
-      .search-box {
+      .sidebar {
         background: #fff;
         /*border: 1px solid #999;*/
         border-radius: 3px;
@@ -45,4 +49,8 @@ html,
         padding: 10px 10px 30px 10px;
         text-align: left;
         width: 340px;
+      }
+
+      #search-results {
+        height: 100%;
       }
