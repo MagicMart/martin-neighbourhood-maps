@@ -1,0 +1,46 @@
+const locations = [
+    {title: 'Potteries Museum & Art Gallery', location: {lat: 53.0229395, lng: -2.1803406}},
+    {title: 'Gladstone Pottery Museum', location: {lat: 52.9868222, lng: -2.1336447}},
+    {title: 'Middleport Pottery', location: {lat: 53.0412292, lng: -2.2119407}},
+    {title: 'Etruria Industrial Museum', location: {lat: 53.0191846, lng: -2.1942034}},
+    {title: 'Spode Museum', location: {lat: 53.0062435, lng: -2.1861088}}
+  ];
+
+ 
+ <Marker
+                        onClick={this.onMarkerClick}
+                        name={'Potteries Museum & Art Gallery'}
+                        position={{lat: 53.0229395, lng: -2.1803406}} />
+                   <Marker
+                        onClick={this.onMarkerClick}
+                        name={'Gladstone Pottery Museum'}
+                        position={{lat: 52.9868222, lng: -2.1336447}} />
+                   <Marker
+                        onClick={this.onMarkerClick}
+                        name={'Middleport Pottery'}
+                        position={{lat: 53.0412292, lng: -2.2119407}} />
+                    <Marker
+                          onClick={this.onMarkerClick}
+                          name={'Etruria Industrial Museum'}
+                          position={{lat: 53.0191846, lng: -2.1942034}} />
+                    <Marker
+                          onClick={this.onMarkerClick}
+                          name={'Spode Museum'}
+                          position={{lat: 53.0062435, lng: -2.1861088}} />  
+
+let build ='';
+        this.props.places.forEach((place)=> {
+            console.log("Props",this.props.places)
+          build += `<Marker
+                 onClick={this.onMarkerClick}
+                 name={'${place.title}'}
+                 position={lat: ${place.location.lat}, lng: ${place.location.lng}} />`
+              })
+
+              console.log(build)
+            const Hello = (<h1>Hello</h1>);
+
+ <div>
+            <input id="filter" type="text" value={this.props.query} 
+                onChange={() => this.props.filter(document.getElementById('filter').value)} />
+        </div>)
