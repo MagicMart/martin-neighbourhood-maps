@@ -24,51 +24,47 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
               }
             };
 
-            componentDidMount() {
-            
-             
-            }
             render() {
              
-
+              console.log("loc",this.props.places[0].location)
               return (
                 <Map id='my-map'
                     //style={{width: '100%', height: '100%', position: 'relative'}}
                     google={this.props.google}
                     onClick={this.onMapClicked}
                     initialCenter={{
-                        lat: 53.0229395,
-                        lng: -2.1803406
+                        lat: 53.0241658,
+                        lng: -2.1915053
                       }}
-                    zoom={12}
+                    zoom={13}
                     >
                   
                  
                       <Marker
-                      visible={this.props.visible}
+                      visible={this.props.places[0].visible}
                       onClick={this.onMarkerClick}
                       name={this.props.places[0].title}
-                      position={this.props.places[0].location} />
-                       <Marker
-                        visible={this.props.visible}
+                      position= {{lat: `${this.props.places[0].location.lat}`,lng: `${this.props.places[0].location.lng}`}} />
+                      <Marker
+                        visible={this.props.places[1].visible}
                         onClick={this.onMarkerClick}
-                        name={'Gladstone Pottery Museum'}
-                        position={{lat: 52.9868222, lng: -2.1336447}} />
-                   <Marker
-                         visible={this.props.visible}
+                        name={this.props.places[1].title}
+                        position={{lat: `${this.props.places[1].location.lat}`,lng: `${this.props.places[1].location.lng}`}} />
+                      <Marker
+                         visible={this.props.places[2].visible}
                         onClick={this.onMarkerClick}
-                        name={'Middleport Pottery'}
-                        position={{lat: 53.0412292, lng: -2.2119407}} />
+                        name={this.props.places[2].title}
+                        position={{lat: `${this.props.places[2].location.lat}`,lng: `${this.props.places[2].location.lng}`}} />
                     <Marker
-                          visible={this.props.visible}
+                          visible={this.props.places[3].visible}
                           onClick={this.onMarkerClick}
-                          name={'Etruria Industrial Museum'}
-                          position={{lat: 53.0191846, lng: -2.1942034}} />
+                          name={this.props.places[3].title}
+                          position={{lat: `${this.props.places[3].location.lat}`,lng: `${this.props.places[3].location.lng}`}} />
                     <Marker
-                     visible={this.props.visible}
+                     visible={this.props.places[4].visible}
                           onClick={this.onMarkerClick}
-                          name={'Spode Museum'}
-                          position={{lat: 53.0062435, lng: -2.1861088}} />  
+                          name={this.props.places[4].title}
+                          position={{lat: `${this.props.places[4].location.lat}`,lng: `${this.props.places[4].location.lng}`}} />  
                       
                       
                   <InfoWindow
