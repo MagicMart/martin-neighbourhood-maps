@@ -54,7 +54,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                     > 
 
                       <Marker 
-                      tabIndex="0"     
+ 
                       visible={this.props.places[0].visible}
                       onClick={this.onMarkerClick}
                       name={this.props.places[0].title}

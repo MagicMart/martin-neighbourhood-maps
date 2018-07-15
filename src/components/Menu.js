@@ -7,7 +7,7 @@ class Menu extends Component {
         return (
            
        <div>
-         <select id="menu" onBlur={this.props.update}>
+         <select id="menu" onChange={this.props.update}>
            <option value="all">All Museums</option>
            <option value="Potteries Museum & Art Gallery">Potteries Museum</option>
            <option value="Gladstone Pottery Museum">Gladstone Pottery Museum</option>
