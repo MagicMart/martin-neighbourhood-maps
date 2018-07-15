@@ -6,20 +6,28 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
               showingInfoWindow: false,
               activeMarker: {},
               selectedPlace: {},
+              initialCenter: {lat: `${this.props.places[0].location.lat}`,lng: `${this.props.places[0].location.lng}`},
+              zoom: 12,
+              center: {}
             };
           
-            onMarkerClick = (props, marker, e) =>
+            onMarkerClick = (props, marker, e) =>{
+            console.log("onClick",props.position)
               this.setState({
                 selectedPlace: props,
                 activeMarker: marker,
-                showingInfoWindow: true
-              });
+                showingInfoWindow: true,
+                zoom: 14,
+                initialCenter: props.position,
+                center: props.position
+              });}
           
             onMapClicked = (props) => {
               if (this.state.showingInfoWindow) {
                 this.setState({
                   showingInfoWindow: false,
-                  activeMarker: null
+                  activeMarker: null,
+                  zoom: 12
                 })
               }
             };
@@ -29,17 +37,17 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
             const menu = document.querySelector('#menu');
             menu.addEventListener('click', this.onMapClicked);
              
-              console.log("loc",this.props.places[0].location)
+              console.log("initialCenter",this.state.initialCenter)
               return (
                 <Map 
                     style={{width: '100%', height: '100%'}}
                     google={this.props.google}
                     onClick={this.onMapClicked}
-                    initialCenter={{
-                        lat: 53.0241658,
-                        lng: -2.1915053
-                      }}
-                    zoom={13}
+                    initialCenter={
+                      this.state.initialCenter
+                      }
+                      center={this.state.center}
+                    zoom={this.state.zoom}
                     > 
 
                       <Marker                   
@@ -75,6 +83,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                     visible={this.state.showingInfoWindow}>
                       <div>
                         <h1 className='marker'>{this.state.selectedPlace.name}</h1>
+                        <h1>A Museum</h1>
                       </div>
                   </InfoWindow>
                 </Map>
