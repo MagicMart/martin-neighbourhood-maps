@@ -27,9 +27,12 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                 this.setState({
                   showingInfoWindow: false,
                   activeMarker: null,
-                  zoom: 12
+                 
                 })
+                
               }
+              this.setState({ zoom: 12,
+                center: {lat: `${this.props.places[0].location.lat}`,lng: `${this.props.places[0].location.lng}`}})
             };
 
             render() {
@@ -50,7 +53,8 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                     zoom={this.state.zoom}
                     > 
 
-                      <Marker                   
+                      <Marker 
+                      tabIndex="0"     
                       visible={this.props.places[0].visible}
                       onClick={this.onMarkerClick}
                       name={this.props.places[0].title}
@@ -83,7 +87,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                     visible={this.state.showingInfoWindow}>
                       <div>
                         <h1 className='marker'>{this.state.selectedPlace.name}</h1>
-                        <h1>A Museum</h1>
+                        <p className='marker'>A Museum</p>
                       </div>
                   </InfoWindow>
                 </Map>
