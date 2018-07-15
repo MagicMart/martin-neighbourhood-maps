@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMaps from './components/GoogleMaps.js'
 import Menu from './components/Menu'
-import SearchResults from './components/SearchResults'
+//import SearchResults from './components/SearchResults'
 import './App.css';
 
 class App extends Component {
@@ -46,21 +46,23 @@ class App extends Component {
     return (
       <div className='container'>
          <div className='sidebar'>
-        <h1>Potteries Museums</h1>
-        <Menu 
-        query={this.state.query}
-        filter={this.filterPlaces}
-        update={this.updateMap}
-        />
-        <SearchResults id='search-results'
-        places={this.state.locations}
-       
-        />
-        
+            <h1>Potteries Museums</h1>
+            <Menu
+            query={this.state.query}
+            filter={this.filterPlaces}
+            update={this.updateMap}
+            />
+            {/* <SearchResults id='search-results'
+            places={this.state.locations}
+          
+            /> */}
+             <div id='map'>
+                <GoogleMaps
+                places={this.state.locations}
+                />
+            </div>
         </div>
-        <GoogleMaps id='map'
-         places={this.state.locations}
-        />
+       
       </div>
     );
   }

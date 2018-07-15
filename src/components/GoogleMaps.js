@@ -25,11 +25,14 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
             };
 
             render() {
+             // Remove infowindow when sidebar is clicked
+            const menu = document.querySelector('#menu');
+            menu.addEventListener('click', this.onMapClicked);
              
               console.log("loc",this.props.places[0].location)
               return (
-                <Map id='my-map'
-                    //style={{width: '100%', height: '100%', position: 'relative'}}
+                <Map 
+                    style={{width: '100%', height: '100%'}}
                     google={this.props.google}
                     onClick={this.onMapClicked}
                     initialCenter={{
@@ -37,10 +40,9 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                         lng: -2.1915053
                       }}
                     zoom={13}
-                    >
-                  
-                 
-                      <Marker
+                    > 
+
+                      <Marker                   
                       visible={this.props.places[0].visible}
                       onClick={this.onMarkerClick}
                       name={this.props.places[0].title}
@@ -56,6 +58,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                         name={this.props.places[2].title}
                         position={{lat: `${this.props.places[2].location.lat}`,lng: `${this.props.places[2].location.lng}`}} />
                     <Marker
+                        
                           visible={this.props.places[3].visible}
                           onClick={this.onMarkerClick}
                           name={this.props.places[3].title}
@@ -71,7 +74,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                     marker={this.state.activeMarker}
                     visible={this.state.showingInfoWindow}>
                       <div>
-                        <h1>{this.state.selectedPlace.name}</h1>
+                        <h1 className='marker'>{this.state.selectedPlace.name}</h1>
                       </div>
                   </InfoWindow>
                 </Map>

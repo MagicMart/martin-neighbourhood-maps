@@ -9,11 +9,11 @@ class Menu extends Component {
        <div>
          <select id="menu" onChange={this.props.update}>
            <option value="all">All Museums</option>
-           <option value="Potteries Museum & Art Gallery">Potteries Museum & Art Gallery</option>
+           <option value="Potteries Museum & Art Gallery">Potteries Museum</option>
            <option value="Gladstone Pottery Museum">Gladstone Pottery Museum</option>
            <option value="Middleport Pottery">Middleport Pottery</option>
            <option value="Etruria Industrial Museum">Etruria Industrial Museum</option>
-           <option value="Spode Museum"></option>
+           <option value="Spode Museum">Spode Museum</option>
         </select>
        </div>
         )

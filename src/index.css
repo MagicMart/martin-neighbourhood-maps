@@ -1,6 +1,7 @@
 html,
       body {
         font-family: Arial, sans-serif;
+        font-size: 14px;
         height: 100%;
         margin: 0;
         padding: 0;
@@ -21,18 +22,23 @@ html,
         display: flex;
         flex-wrap: nowrap;
         height: 100%;
+        widows: 100%;
        /* position: relative;*/
       }
 
-      input {
+     /* input {
         font-size: 14px;
-      }
+      }*/
 
       h1 {
-        color: #525454;
-        font-size: 22px;
-        margin: 0 0 10px 0;
+        color: black;
+        font-size: 1.5em;
+        margin: 0;
         text-align: center;
+      }
+
+      .marker {
+        color: black;
       }
 
       #filter {
@@ -41,23 +47,31 @@ html,
 
       #map {
         bottom:0px;
+        width:75%;
         height: 100%;
-        left: 362px;
+        /*left: 362px;*/
         position: absolute;
         right: 0px;
       }
 
       .sidebar {
-        background: #fff;
+        background: rgb(174, 192, 192);
+        color: white;
         /*border: 1px solid #999;*/
         border-radius: 3px;
+        width: 25%;
         height: 100vh;
         line-height: 35px;
         padding: 10px 10px 30px 10px;
-        text-align: left;
-        width: 340px;
+        text-align: center;
       }
 
-      #search-results {
-        height: 100%;
+      #menu {
+        width: 90%;
+        color: black;
+        font-size: 1.1em;
       }
+
+     /* #search-results {
+        height: 100%;
+      }*/
