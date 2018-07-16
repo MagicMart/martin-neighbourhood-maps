@@ -40,7 +40,14 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
             const menu = document.querySelector('#menu');
             menu.addEventListener('click', this.onMapClicked);
              
-              console.log("initialCenter",this.state.initialCenter)
+  const markers = this.props.places.map((place) => {
+      return (<Marker 
+ 
+        visible={place.visible}
+        onClick={this.onMarkerClick}
+        name={place.title}
+        position= {{lat: `${place.location.lat}`,lng: `${place.location.lng}`}} />)
+  })
               return (
                 <Map 
                     style={{width: '100%', height: '100%'}}
@@ -52,36 +59,8 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                       center={this.state.center}
                     zoom={this.state.zoom}
                     > 
-
-                      <Marker 
- 
-                      visible={this.props.places[0].visible}
-                      onClick={this.onMarkerClick}
-                      name={this.props.places[0].title}
-                      position= {{lat: `${this.props.places[0].location.lat}`,lng: `${this.props.places[0].location.lng}`}} />
-                      <Marker
-                        visible={this.props.places[1].visible}
-                        onClick={this.onMarkerClick}
-                        name={this.props.places[1].title}
-                        position={{lat: `${this.props.places[1].location.lat}`,lng: `${this.props.places[1].location.lng}`}} />
-                      <Marker
-                         visible={this.props.places[2].visible}
-                        onClick={this.onMarkerClick}
-                        name={this.props.places[2].title}
-                        position={{lat: `${this.props.places[2].location.lat}`,lng: `${this.props.places[2].location.lng}`}} />
-                    <Marker
-                        
-                          visible={this.props.places[3].visible}
-                          onClick={this.onMarkerClick}
-                          name={this.props.places[3].title}
-                          position={{lat: `${this.props.places[3].location.lat}`,lng: `${this.props.places[3].location.lng}`}} />
-                    <Marker
-                     visible={this.props.places[4].visible}
-                          onClick={this.onMarkerClick}
-                          name={this.props.places[4].title}
-                          position={{lat: `${this.props.places[4].location.lat}`,lng: `${this.props.places[4].location.lng}`}} />  
-                      
-                      
+                      {markers}
+                                          
                   <InfoWindow
                     marker={this.state.activeMarker}
                     visible={this.state.showingInfoWindow}>
