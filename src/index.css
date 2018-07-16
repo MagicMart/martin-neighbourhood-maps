@@ -32,13 +32,19 @@ html,
 
       h1 {
         color: black;
-        font-size: 1.5em;
+        font-size: 1.4em;
         margin: 0;
         text-align: center;
       }
 
-     .marker {
+     .marker * {
         color: black;
+        font-family: Arial, sans-serif;
+        max-width: 200px;
+      }
+
+      .marker p {
+        font-size: 1.1em;
       }
 
       #filter {

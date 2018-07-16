@@ -8,11 +8,20 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
               selectedPlace: {},
               initialCenter: {lat: `${this.props.places[0].location.lat}`,lng: `${this.props.places[0].location.lng}`},
               zoom: 12,
-              center: {}
+              center: {},
+              wikipedia: []
             };
           
             onMarkerClick = (props, marker, e) =>{
-            console.log("onClick",props.position)
+            
+                fetch(`https://en.wikipedia.org/w/api.php?&origin=*&action=opensearch&search=${props.name}&limit=3`)
+                .then(function(resp) {
+                return resp.json()
+        
+                 // this.setState({wikipedia:resp.json()})
+               }).then((array) => this.setState({wikipedia:array}) )
+              
+            
               this.setState({
                 selectedPlace: props,
                 activeMarker: marker,
@@ -41,11 +50,14 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
             menu.addEventListener('click', this.onMapClicked);
              
   const markers = this.props.places.map((place) => {
-      return (<Marker 
- 
+      return (
+        <Marker 
+        
         visible={place.visible}
         onClick={this.onMarkerClick}
         name={place.title}
+        key={place.title}
+       
         position= {{lat: `${place.location.lat}`,lng: `${place.location.lng}`}} />)
   })
               return (
@@ -64,9 +76,9 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                   <InfoWindow
                     marker={this.state.activeMarker}
                     visible={this.state.showingInfoWindow}>
-                      <div>
-                        <h1 className='marker'>{this.state.selectedPlace.name}</h1>
-                        <p className='marker'>A Museum</p>
+                      <div className="marker">
+                        <h1>{this.state.selectedPlace.name}</h1>
+                        <p>{ this.state.wikipedia[2] }</p>
                       </div>
                   </InfoWindow>
                 </Map>

@@ -16,7 +16,6 @@ class App extends Component {
       {title: 'Spode Museum', location: {lat: 53.0062435, lng: -2.1861088}, visible: true}
     ]
   }
-
   
 
 

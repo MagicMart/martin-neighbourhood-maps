@@ -44,3 +44,32 @@ let build ='';
             <input id="filter" type="text" value={this.props.query} 
                 onChange={() => this.props.filter(document.getElementById('filter').value)} />
         </div>)
+
+ <Marker 
+                      visible={this.props.places[0].visible}
+                      onClick={this.onMarkerClick}
+                      name={this.props.places[0].title}
+                      position= {{lat: `${this.props.places[0].location.lat}`,lng: `${this.props.places[0].location.lng}`}} />
+                      <Marker
+                        visible={this.props.places[1].visible}
+                        onClick={this.onMarkerClick}
+                        name={this.props.places[1].title}
+                        position={{lat: `${this.props.places[1].location.lat}`,lng: `${this.props.places[1].location.lng}`}} />
+                      <Marker
+                         visible={this.props.places[2].visible}
+                        onClick={this.onMarkerClick}
+                        name={this.props.places[2].title}
+                        position={{lat: `${this.props.places[2].location.lat}`,lng: `${this.props.places[2].location.lng}`}} />
+                    <Marker
+                        
+                          visible={this.props.places[3].visible}
+                          onClick={this.onMarkerClick}
+                          name={this.props.places[3].title}
+                          position={{lat: `${this.props.places[3].location.lat}`,lng: `${this.props.places[3].location.lng}`}} />
+                    <Marker
+                     visible={this.props.places[4].visible}
+                          onClick={this.onMarkerClick}
+                          name={this.props.places[4].title}
+                          position={{lat: `${this.props.places[4].location.lat}`,lng: `${this.props.places[4].location.lng}`}} />  
+                      
+ 
