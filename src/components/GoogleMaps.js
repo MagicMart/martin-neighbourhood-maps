@@ -20,7 +20,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
         
                  // this.setState({wikipedia:resp.json()})
                }).then((array) => this.setState({wikipedia:array}) )
-              
+              .catch((error) => console.log('this error', error))
             
               this.setState({
                 selectedPlace: props,
@@ -40,7 +40,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                 })
                 
               }
-              this.setState({ zoom: 12,
+              this.setState({ zoom: 11,
                 center: {lat: `${this.props.places[0].location.lat}`,lng: `${this.props.places[0].location.lng}`}})
             };
 
@@ -57,7 +57,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
         onClick={this.onMarkerClick}
         name={place.title}
         key={place.title}
-       
+        animation={this.props.google.maps.Animation.DROP}
         position= {{lat: `${place.location.lat}`,lng: `${place.location.lng}`}} />)
   })
               return (
@@ -72,13 +72,16 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                     zoom={this.state.zoom}
                     > 
                       {markers}
-                                          
+                      
                   <InfoWindow
                     marker={this.state.activeMarker}
                     visible={this.state.showingInfoWindow}>
                       <div className="marker">
                         <h1>{this.state.selectedPlace.name}</h1>
                         <p>{ this.state.wikipedia[2] }</p>
+                        <div>
+                        <a href={ this.state.wikipedia[3] }>wikipedia</a>
+                        </div>
                       </div>
                   </InfoWindow>
                 </Map>

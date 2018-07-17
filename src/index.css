@@ -47,6 +47,12 @@ html,
         font-size: 1.1em;
       }
 
+      .marker a {
+        color: blue;
+        font-size: 1.1em;
+        padding: 10px;
+      }
+
       #filter {
         width: 90%;
       }
