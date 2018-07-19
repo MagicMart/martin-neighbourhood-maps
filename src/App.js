@@ -65,9 +65,11 @@ class App extends Component {
   
   hamburger  = 
    <div id="hamburger-bar" onClick={this.hamburgerClick}>
-      <div className="hamburger"></div>
-      <div className="hamburger"></div>
-      <div className="hamburger"></div>
+      <div className="bap">
+        <div className="hamburger"></div>
+        <div className="hamburger"></div>
+        <div className="hamburger"></div>
+      </div>
    </div>;
     
 
