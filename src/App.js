@@ -20,10 +20,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const deviceWidth = window.screen.width;
+    const deviceWidth = window.innerWidth;
     this.setState({deviceWidth});
   }
   
+  // Call when the menu has changed
   updateMap =() => {
     
     const choice = document.getElementById('menu').value;
@@ -45,17 +46,29 @@ class App extends Component {
     })
     this.setState({locations: update});
 
+
+   const showMarker = new Promise((resolve) => {
+      if(document.querySelector('.gmnoprint img')) {
+        resolve();
+      }
+    })
+    showMarker.then(() => setTimeout(() => {document.querySelector('.gmnoprint img').click();}, 750 ))
+
     fetch(`https://en.wikipedia.org/w/api.php?&origin=*&action=opensearch&search=${choice}&limit=3`)
     .then(function(resp) {
     return resp.json()})
-    .then((array) => this.setState({wikipedia:array}) )
-    .catch((error) => console.log('this error', error))
-    this.setState({sidebarInfo: true})
+    .then((array) => {this.setState({wikipedia:array, sidebarInfo: true});} )
+    .catch((error) => {
+    let wikipedia = [];
+    wikipedia[1] = "Something went wrong... ";
+    wikipedia[2] = "";
+    wikipedia[3] = "";
+    this.setState({wikipedia: wikipedia, sidebarInfo: true})})
   }
 
   hamburgerClick = () => {
     const sidebar = document.querySelector('.sidebar');
-   sidebar.classList.toggle('sidebar-in');
+    sidebar.classList.toggle('sidebar-in');
 
   } 
 
@@ -71,24 +84,20 @@ class App extends Component {
         <div className="hamburger"></div>
       </div>
    </div>;
-    
-
+   
     return (
       <div className='container'>
          {hamburger}
-         <div className='sidebar'>
-                  
+         <div className='sidebar'> 
             <h1>Potteries Museums</h1>
             <Menu
             query={this.state.query}
             filter={this.filterPlaces}
-            update={this.updateMap}
-            
+            update={this.updateMap}          
             />
             <SidebarInfo id='sidebar-info'
             sidebarInfo={this.state.sidebarInfo}
-            wikipedia={this.state.wikipedia}
-           
+            wikipedia={this.state.wikipedia}   
             /> 
         </div>
         <div id="map">

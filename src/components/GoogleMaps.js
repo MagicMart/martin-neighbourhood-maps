@@ -14,7 +14,6 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
           
             onMarkerClick = (props, marker, e) =>{
-            
                 fetch(`https://en.wikipedia.org/w/api.php?&origin=*&action=opensearch&search=${props.name}&limit=3`)
                 .then(function(resp) {
                 return resp.json()})
@@ -48,7 +47,6 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
              // Remove infowindow when sidebar is clicked
             const menu = document.querySelector('#menu');
             menu.addEventListener('click', this.onMapClicked);
-           
              
   const markers = this.props.places.map((place) => {
       
@@ -63,7 +61,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
       )
   })
 
-     
+
 
               return (
                  <Map 
@@ -77,15 +75,15 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                     zoom={this.state.zoom}
                     > 
                   {markers}
-                    
                   <InfoWindow
                     marker={this.state.activeMarker}
-                    visible={this.state.showingInfoWindow}>
-                      <div className="marker" >
+                    visible={this.state.showingInfoWindow}
+                    >
+                      <div className="marker" tabIndex="0">
                         <h1>{this.state.selectedPlace.name}</h1>
                         <p>{ this.state.wikipedia[2] }</p>
                         <p>Source: 
-                        <a href={ this.state.wikipedia[3] }>wikipedia</a>
+                        <a href={ this.state.wikipedia[3] } aria-label="The source of this information is Wikipedia">wikipedia</a>
                         </p>
                       </div>
                   </InfoWindow>

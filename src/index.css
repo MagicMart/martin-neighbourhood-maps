@@ -43,7 +43,6 @@ h1 {
 .marker {
   max-width: 200px;
   margin: 0;
-  
 }
 
 .marker div {
@@ -61,7 +60,6 @@ h1 {
   font-size: 0.875em;
   padding: 10px;
 }
-
 
 #map {
   bottom: 0px;
@@ -89,6 +87,7 @@ h1 {
 
 #menu {
   width: 90%;
+  height: 48px;
   color: black;
   font-size: 1em;
 }
@@ -98,16 +97,15 @@ h1 {
   margin: auto;
   background: white;
   color: black;
-  font-size: 0.9em;
+  font-size: 1.1em;
   padding: 5px;
   line-height: 1.5em;
   text-align: justify;
-  overflow: scroll;
 }
 
-
-
-
+#sidebar-info p {
+  padding: 10px;
+}
 
 h2 {
   font-size: 1.1em
@@ -121,32 +119,25 @@ h2 {
 }
 
 @media screen and (max-width: 500px) {
-
   .sidebar {
     z-index: 2;
     width: 85%;
   }
-
   .sidebar-in {
     left: -400px;
-  
   }
-
   #map {
     width: 100%;
   }
-
   .hamburger {
-      display: block;
-      height: 5px;
-      width: 40px;
-      background-color: black;
-      margin: 6px 0;
+    display: block;
+    height: 5px;
+    width: 40px;
+    background-color: black;
+    margin: 6px 0;
   }
-
   .bap {
     float: right;
     padding-right: 8px;
   }
-
 }
