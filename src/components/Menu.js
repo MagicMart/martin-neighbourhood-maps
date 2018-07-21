@@ -6,7 +6,7 @@ class Menu extends Component {
         
         return (
            
-       <div>
+       <div className="menu-container">
          <select id="menu" onChange={this.props.update}>
            <option value="all">All Museums</option>
            <option value="Potteries Museum & Art Gallery">Potteries Museum</option>
