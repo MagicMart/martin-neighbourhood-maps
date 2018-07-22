@@ -32,8 +32,8 @@ class App extends Component {
     .catch((error) => {
     let wikipedia = [];
     wikipedia[1] = "Something went wrong... ";
-    wikipedia[2] = "";
-    wikipedia[3] = "";
+    wikipedia[2] = "can't find the page.";
+    wikipedia[3] = "is not available";
     this.setState({wikipedia: wikipedia, sidebarInfo: true})})
   }
 
@@ -93,7 +93,7 @@ class App extends Component {
             update={this.updateMap}          
             />
         </div>
-        <div id="map">
+        <div id="map" role="application" aria-label="Google Maps">
             <GoogleMaps 
             places={this.state.locations}
             />

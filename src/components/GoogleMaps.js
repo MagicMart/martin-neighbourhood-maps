@@ -21,17 +21,17 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                 return resp.json()})
                 .then((array) => {
                     //Reduce Info text to first sentence
-        
-        
-              
-              const string = array[2][0];
-            const point = string.indexOf('.')
-            const sentence =  string.slice(0, point + 1);
-            console.log(sentence);
-            
+                const text = array[2][0];
+                const point = text.indexOf('.')
+                const sentence =  text.slice(0, point + 1);
                   this.setState({wikipedia:array, sentence: sentence})
                 } )
-                .catch((error) => console.log('this error', error))
+                .catch((error) => {
+                  let wikipedia = [];
+                  wikipedia[1] = "Something went wrong... ";
+                  wikipedia[2] = "can't find the page.";
+                  wikipedia[3] = "is not available";
+                  this.setState({wikipedia: wikipedia, sidebarInfo: true})})
             
               this.setState({
                 selectedPlace: props,
@@ -69,12 +69,6 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
               if (e.keyCode === 27){this.onMapClicked()}
             } )
 
-          
-            
-
-           
-             
- 
   const markers = this.props.places.map((place) => {
       
       return (
@@ -108,7 +102,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                         <h2>{this.state.selectedPlace.name}</h2>
                         <p>{ this.state.sentence }</p>
                         <p>Source: 
-                        <a href={ this.state.wikipedia[3] }>{this.state.wikipedia[3]}</a>
+                        <a href={ this.state.wikipedia[3] }>Wikipedia</a>
                         </p>
                       </div>
                     

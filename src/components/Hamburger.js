@@ -4,7 +4,7 @@ class Hamburger extends Component {
   render () {
     return (
 
-      <div id="hamburger-bar" onClick={this.props.hamburgerClick}>
+      <div id="hamburger-bar" onClick={this.props.hamburgerClick} role="navigation">
           <div className="bap">
             <div className="hamburger"></div>
             <div className="hamburger"></div>
