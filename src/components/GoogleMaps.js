@@ -14,6 +14,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
           
             onMarkerClick = (props, marker, e) =>{
+                console.log(marker);
                 fetch(`https://en.wikipedia.org/w/api.php?&origin=*&action=opensearch&search=${props.name}&limit=3`)
                 .then(function(resp) {
                 return resp.json()})
@@ -24,10 +25,11 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                 selectedPlace: props,
                 activeMarker: marker,
                 showingInfoWindow: true,
-                zoom: 14,
+                zoom: 13,
                 initialCenter: props.position,
                 center: props.position
               })
+              setTimeout(() => {document.querySelector('.marker-info').focus()}, 750)
 
             ;}
           
@@ -47,6 +49,9 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
              // Remove infowindow when sidebar is clicked
             const menu = document.querySelector('#menu');
             menu.addEventListener('click', this.onMapClicked);
+           
+             
+            
              
   const markers = this.props.places.map((place) => {
       
@@ -61,11 +66,9 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
       )
   })
 
-
-
               return (
                  <Map 
-                    style={{width: '100%', height: '100%'}}
+                    style={{width: '100%', height: '100%', position: 'relative'}}
                     google={this.props.google}
                     onClick={this.onMapClicked}
                     initialCenter={
@@ -79,13 +82,14 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                     marker={this.state.activeMarker}
                     visible={this.state.showingInfoWindow}
                     >
-                      <div className="marker" tabIndex="0">
-                        <h1>{this.state.selectedPlace.name}</h1>
+                      <div className="marker-info" tabIndex="0">
+                        <h2>{this.state.selectedPlace.name}</h2>
                         <p>{ this.state.wikipedia[2] }</p>
                         <p>Source: 
-                        <a href={ this.state.wikipedia[3] } aria-label="The source of this information is Wikipedia">wikipedia</a>
+                        <a href={ this.state.wikipedia[3] }>{this.state.wikipedia[3]}</a>
                         </p>
                       </div>
+                    
                   </InfoWindow>
                   
                 </Map>

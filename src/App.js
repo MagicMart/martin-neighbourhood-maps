@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import GoogleMaps from './components/GoogleMaps.js'
 import Menu from './components/Menu'
-import SidebarInfo from './components/SidebarInfo'
+import Hamburger from './components/Hamburger'
+//import SidebarInfo from './components/SidebarInfo'
 import './App.css';
 
 class App extends Component {
@@ -23,37 +24,8 @@ class App extends Component {
     const deviceWidth = window.innerWidth;
     this.setState({deviceWidth});
   }
-  
-  // Call when the menu has changed
-  updateMap =() => {
-    
-    const choice = document.getElementById('menu').value;
-    console.log(choice);
-    if (choice === "all") {
-      const update=this.state.locations.map((marker) => {
-        marker.visible = true;
-        console.log(marker.visible)
-        return marker;
-      })
-    this.setState({locations: update, sidebarInfo: false});
-    return;
-    }
-    const update = this.state.locations.map((marker) => {
-      console.log(marker.title)
-      if (choice === marker.title ) {marker.visible = true; return marker}
-        marker.visible = false;
-        return marker
-    })
-    this.setState({locations: update});
 
-
-   const showMarker = new Promise((resolve) => {
-      if(document.querySelector('.gmnoprint img')) {
-        resolve();
-      }
-    })
-    showMarker.then(() => setTimeout(() => {document.querySelector('.gmnoprint img').click();}, 750 ))
-
+  fetchWikipedia =(choice) => {
     fetch(`https://en.wikipedia.org/w/api.php?&origin=*&action=opensearch&search=${choice}&limit=3`)
     .then(function(resp) {
     return resp.json()})
@@ -66,28 +38,54 @@ class App extends Component {
     this.setState({wikipedia: wikipedia, sidebarInfo: true})})
   }
 
+  clickTheMarker = () => {
+    setTimeout(() => {document.querySelector('.gmnoprint > img').click();}, 1000 )
+  }
+  
+  // Call when the menu has changed
+  updateMap =() => {
+    // Slide away sidebar when choice made
+    if(this.state.deviceWidth <= 500) {
+      this.hamburgerClick();
+    }
+    // Display all markers?
+    const choice = document.getElementById('menu').value;
+    console.log(choice);
+    if (choice === "all") {
+      const update=this.state.locations.map((marker) => {
+        marker.visible = true;
+        console.log(marker.visible)
+        return marker;
+      })
+    this.setState({locations: update, sidebarInfo: false});
+    return;
+    }
+    // Marker selected from the list
+    const update = this.state.locations.map((marker) => {
+      console.log(marker.title)
+      if (choice === marker.title ) {marker.visible = true; return marker}
+        marker.visible = false;
+        return marker
+    })
+    this.setState({locations: update});
+    this.fetchWikipedia(choice);
+    this.clickTheMarker();
+   
+  }
+
   hamburgerClick = () => {
     const sidebar = document.querySelector('.sidebar');
     sidebar.classList.toggle('sidebar-in');
-
   } 
 
   render() {
 
-  let hamburger = null;
-  
-  hamburger  = 
-   <div id="hamburger-bar" onClick={this.hamburgerClick}>
-      <div className="bap">
-        <div className="hamburger"></div>
-        <div className="hamburger"></div>
-        <div className="hamburger"></div>
-      </div>
-   </div>;
-   
     return (
+    
       <div className='container'>
-         {hamburger}
+         <Hamburger 
+         hamburgerClick={this.hamburgerClick}
+         />
          <div className='sidebar'> 
             <h1>Potteries Museums</h1>
             <Menu
@@ -95,10 +93,10 @@ class App extends Component {
             filter={this.filterPlaces}
             update={this.updateMap}          
             />
-            <SidebarInfo id='sidebar-info'
+            {/* <SidebarInfo id='sidebar-info'
             sidebarInfo={this.state.sidebarInfo}
             wikipedia={this.state.wikipedia}   
-            /> 
+            />  */}
         </div>
         <div id="map">
             <GoogleMaps 
@@ -107,6 +105,7 @@ class App extends Component {
         </div>
         
       </div>
+      
     );
   }
 }

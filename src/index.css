@@ -1,7 +1,7 @@
 html,
 body {
   font-family: Arial, sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -21,11 +21,15 @@ html {
   box-sizing: inherit;
 }
 
+#root {
+  background: rgb(174, 192, 192);
+}
+
 .container {
+  max-width: 1024px;
   display: flex;
   flex-wrap: wrap;
   height: 100vh;
-  margin: 1px;
   padding: 0;
 }
 
@@ -40,22 +44,28 @@ h1 {
   text-align: center;
 }
 
-.marker {
-  max-width: 200px;
+.marker-info > h2 {
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.marker-info {
+  max-width: 250px;
+  max-height: 190px;
   margin: 0;
 }
 
-.marker div {
+.marker-info div {
   color: black;
   padding: 10px;
 }
 
-.marker p {
+.marker-info p {
   font-size: 1em;
   text-align: justify;
 }
 
-.marker a {
+.marker-info a {
   color: blue;
   font-size: 0.875em;
   padding: 10px;
@@ -64,10 +74,11 @@ h1 {
 #map {
   bottom: 0px;
   width: 75%;
+  max-width: 724px;
   height: 93%;
   /*left: 362px;*/
   position: absolute;
-  right: 0px;
+  left: 300px;
 }
 
 .sidebar {
@@ -75,7 +86,7 @@ h1 {
   color: white;
   /*border: 1px solid #999;*/
   border-radius: 3px;
-  width: 25%;
+  width: 300px;
   height: 100%;
   line-height: 35px;
   padding: 10px 10px 30px 10px;
@@ -86,10 +97,11 @@ h1 {
 }
 
 #menu {
-  width: 90%;
+  width: 98%;
   height: 48px;
   color: black;
-  font-size: 1em;
+  border: 5px solid #222;
+  font-size: 1.1em;
 }
 
 #sidebar-info {
@@ -107,13 +119,10 @@ h1 {
   padding: 10px;
 }
 
-h2 {
-  font-size: 1.1em
-}
-
 #hamburger-bar {
   position: fixed;
   width: 100%;
+  max-width: 1024px;
   height: 7%;
   background: rgb(35, 206, 206);
 }
@@ -122,12 +131,17 @@ h2 {
   .sidebar {
     z-index: 2;
     width: 85%;
+    transition: 0.4s;
   }
+
   .sidebar-in {
     left: -400px;
   }
+
+
   #map {
     width: 100%;
+    left: 0;
   }
   .hamburger {
     display: block;
