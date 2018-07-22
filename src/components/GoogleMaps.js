@@ -43,7 +43,9 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
               })
 
               // Focus info window
-              setTimeout(() => {document.querySelector('.marker-info').focus()}, 1000)
+              setTimeout(() => {
+                if(document.querySelector('.marker-info'))
+                document.querySelector('.marker-info').focus()}, 1000)
 
             ;}
           
