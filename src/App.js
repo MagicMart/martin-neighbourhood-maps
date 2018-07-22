@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import GoogleMaps from './components/GoogleMaps.js'
 import Menu from './components/Menu'
 import Hamburger from './components/Hamburger'
-//import SidebarInfo from './components/SidebarInfo'
 import './App.css';
 
 class App extends Component {
@@ -93,10 +92,6 @@ class App extends Component {
             filter={this.filterPlaces}
             update={this.updateMap}          
             />
-            {/* <SidebarInfo id='sidebar-info'
-            sidebarInfo={this.state.sidebarInfo}
-            wikipedia={this.state.wikipedia}   
-            />  */}
         </div>
         <div id="map">
             <GoogleMaps 

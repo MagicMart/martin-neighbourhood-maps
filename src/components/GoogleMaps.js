@@ -9,7 +9,8 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
               initialCenter: {lat: `${this.props.places[0].location.lat}`,lng: `${this.props.places[0].location.lng}`},
               zoom: 12,
               center: {},
-              wikipedia: []
+              wikipedia: [],
+              sentence: ""
             };
 
           
@@ -18,7 +19,18 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                 fetch(`https://en.wikipedia.org/w/api.php?&origin=*&action=opensearch&search=${props.name}&limit=3`)
                 .then(function(resp) {
                 return resp.json()})
-                .then((array) => this.setState({wikipedia:array}) )
+                .then((array) => {
+                    //Reduce Info text to first sentence
+        
+        
+              
+              const string = array[2][0];
+            const point = string.indexOf('.')
+            const sentence =  string.slice(0, point + 1);
+            console.log(sentence);
+            
+                  this.setState({wikipedia:array, sentence: sentence})
+                } )
                 .catch((error) => console.log('this error', error))
             
               this.setState({
@@ -29,7 +41,9 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                 initialCenter: props.position,
                 center: props.position
               })
-              setTimeout(() => {document.querySelector('.marker-info').focus()}, 750)
+
+              // Focus info window
+              setTimeout(() => {document.querySelector('.marker-info').focus()}, 1000)
 
             ;}
           
@@ -46,13 +60,21 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
             };
 
             render() {
-             // Remove infowindow when sidebar is clicked
+             // Remove infowindow when menu choice made
             const menu = document.querySelector('#menu');
             menu.addEventListener('click', this.onMapClicked);
+
+            // Close infowindow with esc key
+            window.addEventListener("keyup", (e) =>{
+              if (e.keyCode === 27){this.onMapClicked()}
+            } )
+
+          
+            
+
            
              
-            
-             
+ 
   const markers = this.props.places.map((place) => {
       
       return (
@@ -84,7 +106,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                     >
                       <div className="marker-info" tabIndex="0">
                         <h2>{this.state.selectedPlace.name}</h2>
-                        <p>{ this.state.wikipedia[2] }</p>
+                        <p>{ this.state.sentence }</p>
                         <p>Source: 
                         <a href={ this.state.wikipedia[3] }>{this.state.wikipedia[3]}</a>
                         </p>
