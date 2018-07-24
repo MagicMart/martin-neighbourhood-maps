@@ -23,6 +23,7 @@ html {
 
 #root {
   background: rgb(174, 192, 192);
+  height: 100%;
 }
 
 /* .container {
