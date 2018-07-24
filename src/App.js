@@ -49,11 +49,9 @@ class App extends Component {
     }
     // Display all markers?
     const choice = document.getElementById('menu').value;
-    console.log(choice);
     if (choice === "all") {
       const update=this.state.locations.map((marker) => {
         marker.visible = true;
-        console.log(marker.visible)
         return marker;
       })
     this.setState({locations: update, sidebarInfo: false});
@@ -61,7 +59,6 @@ class App extends Component {
     }
     // Marker selected from the list
     const update = this.state.locations.map((marker) => {
-      console.log(marker.title)
       if (choice === marker.title ) {marker.visible = true; return marker}
         marker.visible = false;
         return marker

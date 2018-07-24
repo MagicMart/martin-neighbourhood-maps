@@ -15,7 +15,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
           
             onMarkerClick = (props, marker, e) =>{
-                console.log(marker);
+                
                 fetch(`https://en.wikipedia.org/w/api.php?&origin=*&action=opensearch&search=${props.name}&limit=3`)
                 .then(function(resp) {
                 return resp.json()})
