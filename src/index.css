@@ -25,13 +25,13 @@ html {
   background: rgb(174, 192, 192);
 }
 
-.container {
+/* .container {
   max-width: 1024px;
   display: flex;
   flex-wrap: wrap;
   height: 100vh;
   padding: 0;
-}
+} */
 
 /* input {
   font-size: 14px;

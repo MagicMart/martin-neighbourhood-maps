@@ -78,7 +78,7 @@ class App extends Component {
 
     return (
     
-      <div className='container'>
+      <div>
          <Hamburger 
          hamburgerClick={this.hamburgerClick}
          />
