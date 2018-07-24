@@ -86,7 +86,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
               return (
                  <Map 
-                    style={{width: '100%', height: '100%', position: 'relative'}}
+                    // style={{width: '100%', height: '100%', position: 'absolute'}}
                     google={this.props.google}
                     onClick={this.onMapClicked}
                     initialCenter={
