@@ -13,6 +13,16 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
               sentence: ""
             };
 
+            componentDidMount() {
+                  // Remove infowindow when menu choice made
+              const menu = document.querySelector('#menu');
+              menu.addEventListener('click', this.onMapClicked);
+
+              // Close infowindow with esc key
+              window.addEventListener("keyup", (e) =>{
+                if (e.keyCode === 27){this.onMapClicked()}
+              } )
+            }
           
             onMarkerClick = (props, marker, e) =>{
                 
@@ -62,14 +72,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
             };
 
             render() {
-             // Remove infowindow when menu choice made
-            const menu = document.querySelector('#menu');
-            menu.addEventListener('click', this.onMapClicked);
-
-            // Close infowindow with esc key
-            window.addEventListener("keyup", (e) =>{
-              if (e.keyCode === 27){this.onMapClicked()}
-            } )
+          
 
   const markers = this.props.places.map((place) => {
       

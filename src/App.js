@@ -63,6 +63,7 @@ class App extends Component {
         marker.visible = false;
         return marker
     })
+    
     this.setState({locations: update});
     this.fetchWikipedia(choice);
     this.clickTheMarker();
