@@ -38,12 +38,15 @@ class App extends Component {
   }
 
   clickTheMarker = () => {
-    
-    setTimeout(() => {document.querySelector('.gmnoprint > img').click();}, 2000 )
+    // setTimeout(() => {document.querySelector('.gmnoprint > img').click();}, 2000 )
+    setTimeout(() => {
+      const img =document.querySelectorAll("img[src$='spotlight-poi2_hdpi.png']");
+      img[1].click();}, 2000 )
   }
   
   // Call when the menu has changed
   updateMap =() => {
+
     // Slide away sidebar when choice made
     if(this.state.deviceWidth <= 500) {
       this.hamburgerClick();
