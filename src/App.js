@@ -38,7 +38,8 @@ class App extends Component {
   }
 
   clickTheMarker = () => {
-    setTimeout(() => {document.querySelector('.gmnoprint > img').click();}, 1000 )
+    
+    setTimeout(() => {document.querySelector('.gmnoprint > img').click();}, 2000 )
   }
   
   // Call when the menu has changed
@@ -57,6 +58,7 @@ class App extends Component {
     this.setState({locations: update, sidebarInfo: false});
     return;
     }
+    this.fetchWikipedia(choice);
     // Marker selected from the list
     const update = this.state.locations.map((marker) => {
       if (choice === marker.title ) {marker.visible = true; return marker}
@@ -65,7 +67,7 @@ class App extends Component {
     })
     
     this.setState({locations: update});
-    this.fetchWikipedia(choice);
+   
     this.clickTheMarker();
    
   }
