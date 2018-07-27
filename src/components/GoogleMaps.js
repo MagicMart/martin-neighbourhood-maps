@@ -11,7 +11,8 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
               center: {},
               wikipedia: [],
               sentence: "",
-              animateMarker: false
+              animateMarker: false,
+              locations: []
             };
 
             componentDidMount() {
@@ -23,13 +24,12 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
               window.addEventListener("keyup", (e) =>{
                 if (e.keyCode === 27){this.onMapClicked()}
               } )
+              this.setState({locations: this.props.places})
             }
-          
-            onMarkerClick = (props, marker, e) =>{
-                // this.setState({animateMarker: true})
-                console.log("Marker Clicked:", marker, "props: ", props, "e:", e)
-                fetch(`https://en.wikipedia.org/w/api.php?&origin=*&action=opensearch&search=${props.name}&limit=3`)
-                .then(function(resp) {
+
+            fetchWikipedia =(choice) => {
+              fetch(`https://en.wikipedia.org/w/api.php?&origin=*&action=opensearch&search=${choice}&limit=3`)
+              .then(function(resp) {
                 return resp.json()})
                 .then((array) => {
                     //Reduce Info text to first sentence
@@ -44,7 +44,42 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                   wikipedia[2] = "can't find the page.";
                   wikipedia[3] = "is not available";
                   this.setState({wikipedia: wikipedia, sidebarInfo: true})})
-            
+            }
+
+            // Make only chosen marker visiible
+
+            showTheMarker = (choice) => {
+              const update = this.state.locations.map((marker) => {
+                if (choice === marker.title ) {
+                  marker.visible = true; 
+                 // marker.animate =true;
+                  return marker;
+                }
+                  marker.visible = false;
+                  return marker
+              })
+              
+              this.setState({locations: update});
+            }
+
+            showAllMarkers = () => {
+              const update = this.state.locations.map((marker) => {
+               
+                  marker.visible = true; 
+                
+                  return marker;
+                
+              })
+              this.setState({locations: update});
+            }
+          
+            onMarkerClick = (props, marker, e) =>{
+                // this.setState({animateMarker: true})
+                console.log("Marker Clicked:", marker, "props: ", props, "e:", e);
+                this.showTheMarker(props.name)
+               
+              this.fetchWikipedia(props.name);
+
               this.setState({
                 animateMarker: true,
                 selectedPlace: props,
@@ -64,6 +99,8 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
           
             onMapClicked = (props) => {
               // this.setState({animateMarker: false})
+              document.querySelector('#menu').value==="all" && this.showAllMarkers();
+    
               if (this.state.showingInfoWindow) {
                 this.setState({
                   animateMarker: false,
@@ -79,7 +116,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
             render() {
           
 
-  const markers = this.props.places.map((place) => {
+  const markers = this.state.locations.map((place) => {
       
       return (
         <Marker 
