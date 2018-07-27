@@ -20,7 +20,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const deviceWidth = window.innerWidth;
+    const deviceWidth = window.screen.width;
     this.setState({deviceWidth});
   }
 
@@ -41,7 +41,7 @@ class App extends Component {
     // setTimeout(() => {document.querySelector('.gmnoprint > img').click();}, 2000 )
     setTimeout(() => {
       const img =document.querySelectorAll("img[src$='spotlight-poi2_hdpi.png']");
-      img[1].click();}, 2000 )
+      img[1] && img[1].click();}, 2000 )
   }
   
   // Call when the menu has changed
