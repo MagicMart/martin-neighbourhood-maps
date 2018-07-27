@@ -8,11 +8,11 @@ class App extends Component {
 
   state = {
     locations: [
-      {title: 'Potteries Museum & Art Gallery', location: {lat: 53.0229395, lng: -2.1803406}, visible: true},
-      {title: 'Gladstone Pottery Museum', location: {lat: 52.9868222, lng: -2.1336447}, visible: true},
-      {title: 'Middleport Pottery', location: {lat: 53.0412292, lng: -2.2119407}, visible: true},
-      {title: 'Etruria Industrial Museum', location: {lat: 53.0191846, lng: -2.1942034}, visible: true},
-      {title: 'Spode Museum', location: {lat: 53.0062435, lng: -2.1861088}, visible: true}
+      {title: 'Potteries Museum & Art Gallery', location: {lat: 53.0229395, lng: -2.1803406}, visible: true, animate: false},
+      {title: 'Gladstone Pottery Museum', location: {lat: 52.9868222, lng: -2.1336447}, visible: true, animate: false},
+      {title: 'Middleport Pottery', location: {lat: 53.0412292, lng: -2.2119407}, visible: true, animate: false},
+      {title: 'Etruria Industrial Museum', location: {lat: 53.0191846, lng: -2.1942034}, visible: true, animate: false},
+      {title: 'Spode Museum', location: {lat: 53.0062435, lng: -2.1861088}, visible: true, animate: false}
     ],
     sidebarInfo: false,
     wikipedia: [],
@@ -64,7 +64,11 @@ class App extends Component {
     this.fetchWikipedia(choice);
     // Marker selected from the list
     const update = this.state.locations.map((marker) => {
-      if (choice === marker.title ) {marker.visible = true; return marker}
+      if (choice === marker.title ) {
+        marker.visible = true; 
+       // marker.animate =true;
+        return marker;
+      }
         marker.visible = false;
         return marker
     })

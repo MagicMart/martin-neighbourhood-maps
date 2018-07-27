@@ -10,7 +10,8 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
               zoom: 12,
               center: {},
               wikipedia: [],
-              sentence: ""
+              sentence: "",
+              animateMarker: false
             };
 
             componentDidMount() {
@@ -25,7 +26,8 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
             }
           
             onMarkerClick = (props, marker, e) =>{
-                
+                // this.setState({animateMarker: true})
+                console.log("Marker Clicked:", marker, "props: ", props, "e:", e)
                 fetch(`https://en.wikipedia.org/w/api.php?&origin=*&action=opensearch&search=${props.name}&limit=3`)
                 .then(function(resp) {
                 return resp.json()})
@@ -44,6 +46,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                   this.setState({wikipedia: wikipedia, sidebarInfo: true})})
             
               this.setState({
+                animateMarker: true,
                 selectedPlace: props,
                 activeMarker: marker,
                 showingInfoWindow: true,
@@ -60,8 +63,10 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
             ;}
           
             onMapClicked = (props) => {
+              // this.setState({animateMarker: false})
               if (this.state.showingInfoWindow) {
                 this.setState({
+                  animateMarker: false,
                   showingInfoWindow: false,
                   activeMarker: null               
                 })            
@@ -82,7 +87,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
         onClick={this.onMarkerClick}
         name={place.title}
         key={place.title}
-        animation={this.props.google.maps.Animation.DROP}
+        animation={this.state.animateMarker && this.props.google.maps.Animation.DROP}
         position= {{lat: `${place.location.lat}`,lng: `${place.location.lng}`}} />
       )
   })
