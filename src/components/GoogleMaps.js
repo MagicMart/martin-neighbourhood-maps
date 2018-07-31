@@ -4,9 +4,10 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
        export class MapContainer extends Component {
             state = {
               showingInfoWindow: false,
-              activeMarker: {},
+              activeMarker: {lat: 0, lng :0},
+              infoPosition: {lat: 0, lng: 0},
               selectedPlace: {},
-              initialCenter: {lat: `${this.props.places[0].location.lat}`,lng: `${this.props.places[0].location.lng}`},
+              initialCenter: {lat: `${this.props.places[0].position.lat}`,lng: `${this.props.places[0].position.lng}`},
               zoom: 12,
               center: {},
               wikipedia: [],
@@ -18,13 +19,27 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
             componentDidMount() {
                   // Remove infowindow when menu choice made
               const menu = document.querySelector('#menu');
-              menu.addEventListener('click', this.onMapClicked);
+              // menu.addEventListener('click', this.onMapClicked);
+              menu.addEventListener('change', () => {
+                const menu=document.querySelector('#menu').value;
+                if(menu === "all") {this.onMapClicked(); return}
+                const selected = this.state.locations.filter((loc) => loc.name === menu )
+                console.log("SEL",selected[0])
+                
+                this.onMarkerClick(selected[0])
+                
+              })
 
               // Close infowindow with esc key
               window.addEventListener("keyup", (e) =>{
                 if (e.keyCode === 27){this.onMapClicked()}
               } )
               this.setState({locations: this.props.places})
+              console.log(this.props.google.maps)
+              // this.props.google.maps.event.addListener("click",() => {
+              //   console.log("Zoom changed")
+              // })
+    
             }
 
             fetchWikipedia =(choice) => {
@@ -50,7 +65,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
             showTheMarker = (choice) => {
               const update = this.state.locations.map((marker) => {
-                if (choice === marker.title ) {
+                if (choice === marker.name ) {
                   marker.visible = true; 
                  // marker.animate =true;
                   return marker;
@@ -75,15 +90,16 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
           
             onMarkerClick = (props, marker, e) =>{
                 // this.setState({animateMarker: true})
-                console.log("Marker Clicked:", marker, "props: ", props, "e:", e);
+               // console.log("Marker Clicked:", marker, "props POSITION: ", props.position, "e:", e);
                 this.showTheMarker(props.name)
-               
+              
+              const infoPosition = {lat: (props.position.lat) + 0.003, lng: props.position.lng}
               this.fetchWikipedia(props.name);
-
               this.setState({
                 animateMarker: true,
                 selectedPlace: props,
-                activeMarker: marker,
+                activeMarker: props.position,
+                infoPosition: infoPosition,
                 showingInfoWindow: true,
                 zoom: 13,
                 initialCenter: props.position,
@@ -108,24 +124,23 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                   activeMarker: null               
                 })            
               }
-              if(this.state.zoom !==12 && this.state.center !== {lat: `${this.props.places[0].location.lat}`,lng: `${this.props.places[0].location.lng}`})
+              if(this.state.zoom !==12 && this.state.center !== {lat: `${this.props.places[0].position.lat}`,lng: `${this.props.places[0].position.lng}`})
               this.setState({ zoom: 12,
-                center: {lat: `${this.props.places[0].location.lat}`,lng: `${this.props.places[0].location.lng}`}})
+                center: {lat: `${this.props.places[0].position.lat}`,lng: `${this.props.places[0].position.lng}`}})
             };
 
             render() {
           
-
   const markers = this.state.locations.map((place) => {
       
       return (
         <Marker 
         visible={place.visible}
         onClick={this.onMarkerClick}
-        name={place.title}
-        key={place.title}
+        name={place.name}
+        key={place.name}
         animation={this.state.animateMarker && this.props.google.maps.Animation.DROP}
-        position= {{lat: `${place.location.lat}`,lng: `${place.location.lng}`}} />
+        position= {{lat: place.position.lat, lng: place.position.lng}} />
       )
   })
 
@@ -141,8 +156,8 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                     zoom={this.state.zoom}
                     > 
                   {markers}
-                  <InfoWindow
-                    marker={this.state.activeMarker}
+                  <InfoWindow 
+                    position={this.state.infoPosition}
                     visible={this.state.showingInfoWindow}
                     >
                       <div className="marker-info" tabIndex="0">
