@@ -52,30 +52,30 @@ class App extends Component {
       this.hamburgerClick();
     }
     // Display all markers?
-    const choice = document.getElementById('menu').value;
-    if (choice === "all") {
-      const update=this.state.locations.map((marker) => {
-        marker.visible = true;
-        return marker;
-      })
-    this.setState({locations: update, sidebarInfo: false});
-    return;
-    }
-    this.fetchWikipedia(choice);
-    // Marker selected from the list
-    const update = this.state.locations.map((marker) => {
-      if (choice === marker.name ) {
-        marker.visible = true; 
-       // marker.animate =true;
-        return marker;
-      }
-        marker.visible = false;
-        return marker
-    })
+    // const choice = document.getElementById('menu').value;
+    // if (choice === "all") {
+    //   const update=this.state.locations.map((marker) => {
+    //     marker.visible = true;
+    //     return marker;
+    //   })
+    // this.setState({locations: update, sidebarInfo: false});
+    // return;
+    // }
+    // this.fetchWikipedia(choice);
+    // // Marker selected from the list
+    // const update = this.state.locations.map((marker) => {
+    //   if (choice === marker.name ) {
+    //     marker.visible = true; 
+    //    // marker.animate =true;
+    //     return marker;
+    //   }
+    //     marker.visible = false;
+    //     return marker
+    // })
     
-    this.setState({locations: update});
+    // this.setState({locations: update});
    
-    this.clickTheMarker();
+    // this.clickTheMarker();
    
   }
 
