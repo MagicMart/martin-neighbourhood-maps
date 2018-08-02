@@ -19,14 +19,28 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
             componentDidMount() {
                   // Remove infowindow when menu choice made
               const menu = document.querySelector('#menu');
-              // menu.addEventListener('click', this.onMapClicked);
+              // const menuContainer = document.querySelector('.menu-container');
+              // console.log(menuContainer)
+              // menuContainer.addEventListener('click', () => {
+              //   //if(this.state.zoom === 12) {return} else {this.onMapClicked()}
+              //   this.onMapClicked();
+              // });
               menu.addEventListener('change', () => {
                 const menu=document.querySelector('#menu').value;
                 if(menu === "all") {this.onMapClicked(); return}
-                const selected = this.state.locations.filter((loc) => loc.name === menu )
-                console.log("SEL",selected[0])
-                
-                this.onMarkerClick(selected[0])
+                this.onMapClicked()
+                setTimeout(() => { 
+                  const imgs = document.querySelectorAll('.gmnoprint > img');
+                  console.log(imgs);
+                  const selected = this.state.locations.filter((loc) => loc.name === menu )
+                  let i = [];
+                  this.state.locations.forEach((loc, index) => {if(loc.name === menu) {i.push(index)}});
+                  console.log("index", i)
+                  console.log("SEL",selected[0])
+                  imgs[i[0]].click();
+                 //this.onMarkerClick(selected[0])
+                }, 1000)
+               
                 
               })
 
@@ -93,13 +107,13 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                // console.log("Marker Clicked:", marker, "props POSITION: ", props.position, "e:", e);
                 this.showTheMarker(props.name)
               
-              const infoPosition = {lat: (props.position.lat) + 0.003, lng: props.position.lng}
+            //  const infoPosition = {lat: (props.position.lat) + 0.003, lng: props.position.lng}
               this.fetchWikipedia(props.name);
               this.setState({
                 animateMarker: true,
                 selectedPlace: props,
-                activeMarker: props.position,
-                infoPosition: infoPosition,
+                activeMarker: marker,
+               // infoPosition: infoPosition,
                 showingInfoWindow: true,
                 zoom: 13,
                 initialCenter: props.position,
@@ -115,8 +129,8 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
           
             onMapClicked = (props) => {
               // this.setState({animateMarker: false})
-              document.querySelector('#menu').value==="all" && this.showAllMarkers();
-    
+             // document.querySelector('#menu').value==="all" && this.showAllMarkers();
+              this.showAllMarkers();
               if (this.state.showingInfoWindow) {
                 this.setState({
                   animateMarker: false,
@@ -157,7 +171,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                     > 
                   {markers}
                   <InfoWindow 
-                    position={this.state.infoPosition}
+                    marker={this.state.activeMarker}
                     visible={this.state.showingInfoWindow}
                     >
                       <div className="marker-info" tabIndex="0">
