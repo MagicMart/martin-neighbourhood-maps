@@ -37,7 +37,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                   this.state.locations.forEach((loc, index) => {if(loc.name === menu) {i.push(index)}});
                   console.log("index", i)
                   console.log("SEL",selected[0])
-                  imgs[i[0]].click();
+                  imgs[i[0]] && imgs[i[0]].click();
                  //this.onMarkerClick(selected[0])
                 }, 1000)
                
@@ -77,24 +77,24 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
             // Make only chosen marker visiible
 
-            showTheMarker = (choice) => {
+            animateTheMarker = (choice) => {
               const update = this.state.locations.map((marker) => {
                 if (choice === marker.name ) {
-                  marker.visible = true; 
+                  marker.animate = true; 
                  // marker.animate =true;
                   return marker;
                 }
-                  marker.visible = false;
+                  marker.animate = false;
                   return marker
               })
               
               this.setState({locations: update});
             }
 
-            showAllMarkers = () => {
+            freezeMarkers = () => {
               const update = this.state.locations.map((marker) => {
                
-                  marker.visible = true; 
+                  marker.animate = false; 
                 
                   return marker;
                 
@@ -105,7 +105,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
             onMarkerClick = (props, marker, e) =>{
                 // this.setState({animateMarker: true})
                // console.log("Marker Clicked:", marker, "props POSITION: ", props.position, "e:", e);
-                this.showTheMarker(props.name)
+                this.animateTheMarker(props.name)
               
             //  const infoPosition = {lat: (props.position.lat) + 0.003, lng: props.position.lng}
               this.fetchWikipedia(props.name);
@@ -129,8 +129,8 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
           
             onMapClicked = (props) => {
               // this.setState({animateMarker: false})
-             // document.querySelector('#menu').value==="all" && this.showAllMarkers();
-              this.showAllMarkers();
+             // document.querySelector('#menu').value==="all" && this.freezeMarkers();
+              this.freezeMarkers();
               if (this.state.showingInfoWindow) {
                 this.setState({
                   animateMarker: false,
@@ -153,7 +153,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
         onClick={this.onMarkerClick}
         name={place.name}
         key={place.name}
-        animation={this.state.animateMarker && this.props.google.maps.Animation.DROP}
+        animation={place.animate && this.props.google.maps.Animation.DROP}
         position= {{lat: place.position.lat, lng: place.position.lng}} />
       )
   })
