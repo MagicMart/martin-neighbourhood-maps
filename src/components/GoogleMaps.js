@@ -121,9 +121,9 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
               })
 
               // Focus info window
-              setTimeout(() => {
-                if(document.querySelector('.marker-info'))
-                document.querySelector('.marker-info').focus()}, 1000)
+              // setTimeout(() => {
+              //   if(document.querySelector('.marker-info'))
+              //   document.querySelector('.marker-info').focus()}, 1000)
 
             ;}
           
@@ -142,6 +142,11 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
               this.setState({ zoom: 12,
                 center: {lat: `${this.props.places[0].position.lat}`,lng: `${this.props.places[0].position.lng}`}})
             };
+
+            infoWindowOpen = () => {
+              const markerInfo = document.querySelector('.marker-info');
+              markerInfo && markerInfo.focus();
+            }
 
             render() {
           
@@ -173,6 +178,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                   <InfoWindow 
                     marker={this.state.activeMarker}
                     visible={this.state.showingInfoWindow}
+                    onOpen={this.infoWindowOpen}
                     >
                       <div className="marker-info" tabIndex="0">
                         <h2>{this.state.selectedPlace.name}</h2>
