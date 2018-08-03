@@ -28,7 +28,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
               menu.addEventListener('change', () => {
                 const menu=document.querySelector('#menu').value;
                 if(menu === "all") {this.onMapClicked(); return}
-                this.onMapClicked()
+                this.state.zoom !==12 && this.onMapClicked()
                 setTimeout(() => { 
                   const imgs = document.querySelectorAll('.gmnoprint > img');
                   console.log(imgs);
@@ -59,6 +59,16 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
             fetchWikipedia =(choice) => {
               fetch(`https://en.wikipedia.org/w/api.php?&origin=*&action=opensearch&search=${choice}&limit=3`)
               .then(function(resp) {
+                if (resp.status !== 200) {
+                  console.log('Looks like there was a problem. Status Code: ' +
+                    resp.status);
+                    let wikipedia = [];
+                    wikipedia[1] = "Couldn't fetch the data... ";
+                    wikipedia[2] = "";
+                    wikipedia[3] = "is not available";
+                    this.setState({wikipedia: wikipedia, sidebarInfo: true})
+                  return;
+                }
                 return resp.json()})
                 .then((array) => {
                     //Reduce Info text to first sentence
