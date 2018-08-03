@@ -37,7 +37,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                   this.state.locations.forEach((loc, index) => {if(loc.name === menu) {i.push(index)}});
                   console.log("index", i)
                   console.log("SEL",selected[0])
-                  imgs[i[0]].click();
+                  imgs[i[0]] && imgs[i[0]].click();
                  //this.onMarkerClick(selected[0])
                 }, 1000)
                
