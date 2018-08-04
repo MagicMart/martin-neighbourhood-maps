@@ -13,7 +13,8 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
               wikipedia: [],
               sentence: "",
               animateMarker: false,
-              locations: []
+              locations: [],
+              markers:[]
             };
 
             componentDidMount() {
@@ -31,8 +32,8 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                   this.state.locations.forEach((loc, index) => {if(loc.name === menu) {i.push(index)}});
                   console.log("index", i)
                   console.log("SEL",selected[0])
-                  imgs[i[0]] && imgs[i[0]].click();
-                 //this.onMarkerClick(selected[0])
+                  //imgs[i[0]] && imgs[i[0]].click();
+                  this.onMarkerClick(selected[0])
                 }, 1000)
                
                 
@@ -60,7 +61,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                     wikipedia[1] = "Couldn't fetch the data... ";
                     wikipedia[2] = "";
                     wikipedia[3] = "is not available";
-                    this.setState({wikipedia: wikipedia, sidebarInfo: true})
+                    this.setState({wikipedia: wikipedia})
                   return;
                 }
                 return resp.json()})
@@ -115,7 +116,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
               this.setState({
                 animateMarker: true,
                 selectedPlace: props,
-                activeMarker: marker,
+                activeMarker: props.position,
                // infoPosition: infoPosition,
                 showingInfoWindow: true,
                 zoom: 13,
@@ -147,7 +148,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
             }
 
             render() {
-          
+         const {google} = this.props; 
   const markers = this.state.locations.map((place) => {
       
       return (
@@ -158,15 +159,15 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
         key={place.name}
         animation={this.state.animateMarker && this.props.google.maps.Animation.DROP}
         position= {{lat: place.position.lat, lng: place.position.lng}} 
-        // icon={{
-        //   url: "",
-        //    anchor: this.props.google.maps.Point(32,32),
-        //    scaledSize: this.props.google.maps.Size(64,64)
-        // }}
+        icon={{
+          url: "https://maps.google.com/mapfiles/kml/shapes/info-i_maps.png",
+           anchor: new google.maps.Point(32,16),
+           scaledSize: new google.maps.Size(64,64)
+        }}
         />
       )
   })
-
+  
               return (
                  <Map 
                     // style={{width: '100%', height: '100%', position: 'absolute'}}
@@ -180,7 +181,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                     > 
                   {markers}
                   <InfoWindow 
-                    marker={this.state.activeMarker}
+                    position={this.state.activeMarker}
                     visible={this.state.showingInfoWindow}
                     onOpen={this.infoWindowOpen}
                     >
