@@ -17,14 +17,8 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
             };
 
             componentDidMount() {
-                  // Remove infowindow when menu choice made
               const menu = document.querySelector('#menu');
-              // const menuContainer = document.querySelector('.menu-container');
-              // console.log(menuContainer)
-              // menuContainer.addEventListener('click', () => {
-              //   //if(this.state.zoom === 12) {return} else {this.onMapClicked()}
-              //   this.onMapClicked();
-              // });
+            
               menu.addEventListener('change', () => {
                 const menu=document.querySelector('#menu').value;
                 if(menu === "all") {this.onMapClicked(); return}
@@ -113,8 +107,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
             }
           
             onMarkerClick = (props, marker, e) =>{
-                // this.setState({animateMarker: true})
-               // console.log("Marker Clicked:", marker, "props POSITION: ", props.position, "e:", e);
+              
                 this.showTheMarker(props.name)
               
             //  const infoPosition = {lat: (props.position.lat) + 0.003, lng: props.position.lng}
@@ -129,11 +122,6 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                 initialCenter: props.position,
                 center: props.position
               })
-
-              // Focus info window
-              // setTimeout(() => {
-              //   if(document.querySelector('.marker-info'))
-              //   document.querySelector('.marker-info').focus()}, 1000)
 
             ;}
           
@@ -169,7 +157,13 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
         name={place.name}
         key={place.name}
         animation={this.state.animateMarker && this.props.google.maps.Animation.DROP}
-        position= {{lat: place.position.lat, lng: place.position.lng}} />
+        position= {{lat: place.position.lat, lng: place.position.lng}} 
+        // icon={{
+        //   url: "",
+        //    anchor: this.props.google.maps.Point(32,32),
+        //    scaledSize: this.props.google.maps.Size(64,64)
+        // }}
+        />
       )
   })
 

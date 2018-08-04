@@ -14,7 +14,6 @@ class App extends Component {
       {name: 'Etruria Industrial Museum', position: {lat: 53.0191846, lng: -2.1942034}, visible: true, animate: false},
       {name: 'Spode Museum', position: {lat: 53.0062435, lng: -2.1861088}, visible: true, animate: false}
     ],
-    sidebarInfo: false,
     wikipedia: [],
     deviceWidth: 0
   }
@@ -34,14 +33,7 @@ class App extends Component {
     wikipedia[1] = "Something went wrong... ";
     wikipedia[2] = "can't find the page.";
     wikipedia[3] = "is not available";
-    this.setState({wikipedia: wikipedia, sidebarInfo: true})})
-  }
-
-  clickTheMarker = () => {
-    // setTimeout(() => {document.querySelector('.gmnoprint > img').click();}, 2000 )
-    setTimeout(() => {
-      const img =document.querySelectorAll("img[src$='spotlight-poi2_hdpi.png']");
-      img[1] && img[1].click();}, 2000 )
+    this.setState({wikipedia: wikipedia})})
   }
   
   // Call when the menu has changed
@@ -51,31 +43,6 @@ class App extends Component {
     if(this.state.deviceWidth <= 500) {
       this.hamburgerClick();
     }
-    // Display all markers?
-    // const choice = document.getElementById('menu').value;
-    // if (choice === "all") {
-    //   const update=this.state.locations.map((marker) => {
-    //     marker.visible = true;
-    //     return marker;
-    //   })
-    // this.setState({locations: update, sidebarInfo: false});
-    // return;
-    // }
-    // this.fetchWikipedia(choice);
-    // // Marker selected from the list
-    // const update = this.state.locations.map((marker) => {
-    //   if (choice === marker.name ) {
-    //     marker.visible = true; 
-    //    // marker.animate =true;
-    //     return marker;
-    //   }
-    //     marker.visible = false;
-    //     return marker
-    // })
-    
-    // this.setState({locations: update});
-   
-    // this.clickTheMarker();
    
   }
 
@@ -95,8 +62,6 @@ class App extends Component {
          <div className='sidebar'> 
             <h1>Potteries Museums</h1>
             <Menu
-            query={this.state.query}
-            filter={this.filterPlaces}
             update={this.updateMap}          
             />
         </div>
