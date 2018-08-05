@@ -14,7 +14,6 @@ class App extends Component {
       {name: 'Etruria Industrial Museum', position: {lat: 53.0191846, lng: -2.1942034}, visible: true, animate: false},
       {name: 'Spode Museum', position: {lat: 53.0062435, lng: -2.1861088}, visible: true, animate: false}
     ],
-    wikipedia: [],
     deviceWidth: 0
   }
 
@@ -23,26 +22,17 @@ class App extends Component {
     this.setState({deviceWidth});
   }
 
-  fetchWikipedia =(choice) => {
-    fetch(`https://en.wikipedia.org/w/api.php?&origin=*&action=opensearch&search=${choice}&limit=3`)
-    .then(function(resp) {
-    return resp.json()})
-    .then((array) => {this.setState({wikipedia:array, sidebarInfo: true});} )
-    .catch((error) => {
-    let wikipedia = [];
-    wikipedia[1] = "Something went wrong... ";
-    wikipedia[2] = "can't find the page.";
-    wikipedia[3] = "is not available";
-    this.setState({wikipedia: wikipedia})})
-  }
   
   // Call when the menu has changed
-  updateMap =() => {
-
+  updateMap =(choice) => {
+    
     // Slide away sidebar when choice made
     if(this.state.deviceWidth <= 500) {
       this.hamburgerClick();
+      
     }
+    console.log("Inside app",choice)
+    // this.state.choice !== choice && this.setState({choice})
    
   }
 
@@ -68,6 +58,7 @@ class App extends Component {
         <div id="map" role="application" aria-label="Google Maps">
             <GoogleMaps 
             places={this.state.locations}
+            menu={this.state.choice}
             />
         </div>
         
