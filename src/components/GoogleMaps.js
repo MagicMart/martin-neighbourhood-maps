@@ -5,7 +5,6 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
             state = {
               showingInfoWindow: false,
               activeMarker: {lat: 0, lng :0},
-              infoPosition: {lat: 0, lng: 0},
               selectedPlace: {},
               initialCenter: {lat: `${this.props.places[0].position.lat}`,lng: `${this.props.places[0].position.lng}`},
               zoom: 12,
@@ -25,14 +24,9 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                 if(menu === "all") {this.onMapClicked(); return}
                 this.state.zoom !==12 && this.onMapClicked()
                 setTimeout(() => { 
-                  const imgs = document.querySelectorAll('.gmnoprint > img');
-                  console.log(imgs);
                   const selected = this.state.locations.filter((loc) => loc.name === menu )
                   let i = [];
                   this.state.locations.forEach((loc, index) => {if(loc.name === menu) {i.push(index)}});
-                  console.log("index", i)
-                  console.log("SEL",selected[0])
-                  //imgs[i[0]] && imgs[i[0]].click();
                   this.onMarkerClick(selected[0])
                 }, 1000)
                
@@ -43,11 +37,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
               window.addEventListener("keyup", (e) =>{
                 if (e.keyCode === 27){this.onMapClicked()}
               } )
-              this.setState({locations: this.props.places})
-              console.log(this.props.google.maps)
-              // this.props.google.maps.event.addListener("click",() => {
-              //   console.log("Zoom changed")
-              // })
+              this.setState({locations: this.props.places});
     
             }
 
@@ -111,13 +101,11 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
               
                 this.showTheMarker(props.name)
               
-            //  const infoPosition = {lat: (props.position.lat) + 0.003, lng: props.position.lng}
               this.fetchWikipedia(props.name);
               this.setState({
                 animateMarker: true,
                 selectedPlace: props,
                 activeMarker: props.position,
-               // infoPosition: infoPosition,
                 showingInfoWindow: true,
                 zoom: 13,
                 initialCenter: props.position,
