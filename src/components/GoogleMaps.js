@@ -153,7 +153,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
           //  scaledSize: new google.maps.Size(64,64)
           path: google.maps.SymbolPath.CIRCLE,
           scale: 10,
-          strokeColor: "rgb(74,121,165)",
+          strokeColor: "red",
           strokeOpacity: 0.6
            // fillColor: "rgb(26,13,171)",
           // fillOpacity: 0.6,
