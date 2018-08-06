@@ -148,9 +148,15 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
         animation={this.state.animateMarker && this.props.google.maps.Animation.DROP}
         position= {{lat: place.position.lat, lng: place.position.lng}} 
         icon={{
-          url: "https://maps.google.com/mapfiles/kml/shapes/info-i_maps.png",
-           anchor: new google.maps.Point(32,16),
-           scaledSize: new google.maps.Size(64,64)
+          // url: "https://maps.google.com/mapfiles/kml/shapes/info-i_maps.png",
+          //  anchor: new google.maps.Point(32,16),
+          //  scaledSize: new google.maps.Size(64,64)
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 10,
+          strokeColor: "rgb(74,121,165)",
+          strokeOpacity: 0.6
+           // fillColor: "rgb(26,13,171)",
+          // fillOpacity: 0.6,
         }}
         />
       )
