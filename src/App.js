@@ -52,7 +52,8 @@ class App extends Component {
          <div className='sidebar'> 
             <h1>Potteries Museums</h1>
             <Menu
-            update={this.updateMap}          
+            update={this.updateMap}
+            locations={this.state.locations}         
             />
         </div>
         <div id="map" role="application" aria-label="Google Maps">
