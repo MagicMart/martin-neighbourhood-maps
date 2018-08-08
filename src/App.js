@@ -12,7 +12,8 @@ class App extends Component {
       {name: 'Gladstone Pottery Museum', position: {lat: 52.9868222, lng: -2.1336447}, visible: true, animate: false},
       {name: 'Middleport Pottery', position: {lat: 53.0412292, lng: -2.2119407}, visible: true, animate: false},
       {name: 'Etruria Industrial Museum', position: {lat: 53.0191846, lng: -2.1942034}, visible: true, animate: false},
-      {name: 'Spode Museum', position: {lat: 53.0062435, lng: -2.1861088}, visible: true, animate: false}
+      {name: 'Spode Museum', position: {lat: 53.0062435, lng: -2.1861088}, visible: true, animate: false},
+      //{name: 'World of Wedgwood', position: {lat: 52.9519207, lng: -2.1707704}, visible: true, animate: false}
     ],
     deviceWidth: 0
   }

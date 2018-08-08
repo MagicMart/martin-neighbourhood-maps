@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
+
        export class MapContainer extends Component {
             state = {
               showingInfoWindow: false,
@@ -25,8 +26,8 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                 this.state.zoom !==12 && this.onMapClicked()
                 setTimeout(() => { 
                   const selected = this.state.locations.filter((loc) => loc.name === menu )
-                  let i = [];
-                  this.state.locations.forEach((loc, index) => {if(loc.name === menu) {i.push(index)}});
+                  // let i = [];
+                  // this.state.locations.forEach((loc, index) => {if(loc.name === menu) {i.push(index)}});
                   this.onMarkerClick(selected[0])
                 }, 1000)
                
@@ -44,19 +45,16 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
             fetchWikipedia =(choice) => {
               fetch(`https://en.wikipedia.org/w/api.php?&origin=*&action=opensearch&search=${choice}&limit=3`)
               .then(function(resp) {
-                if (resp.status !== 200) {
-                  console.log('Looks like there was a problem. Status Code: ' +
-                    resp.status);
-                    let wikipedia = [];
-                    wikipedia[1] = "Couldn't fetch the data... ";
-                    wikipedia[2] = "";
-                    wikipedia[3] = "is not available";
-                    this.setState({wikipedia: wikipedia})
-                  return;
+                if (!resp.ok) {
+                  return Promise.reject({
+                    status: resp.status,
+                    statusText: resp.statusTest
+                  });
                 }
                 return resp.json()})
                 .then((array) => {
                     //Reduce Info text to first sentence
+               if(array[0] === "") {this.setState({wikipedia: []}); return}
                 const text = array[2][0];
                 const point = text.indexOf('.')
                 const sentence =  text.slice(0, point + 1);
@@ -65,7 +63,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                 .catch((error) => {
                   let wikipedia = [];
                   wikipedia[1] = "Something went wrong... ";
-                  wikipedia[2] = "can't find the page.";
+                  wikipedia[2] = error.statusText;
                   wikipedia[3] = "is not available";
                   this.setState({wikipedia: wikipedia, sidebarInfo: true})})
             }
