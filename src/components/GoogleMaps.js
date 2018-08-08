@@ -177,14 +177,16 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                     visible={this.state.showingInfoWindow}
                     onOpen={this.infoWindowOpen}
                     >
-                      <div className="marker-info" tabIndex="0">
-                        <h2>{this.state.selectedPlace.name}</h2>
-                        <p>{ this.state.sentence }</p>
-                        <p>Source: 
-                        <a href={ this.state.wikipedia[3] }>Wikipedia</a>
-                        </p>
-                      </div>
-                    
+                    <div>
+                      <a href={ this.state.wikipedia[3] }
+                       style={{display: "block", textDecoration: "none", color: "black"}} 
+                       className="marker-info" tabIndex="0">
+                       
+                          <h2>{this.state.selectedPlace.name}</h2>
+                          <p>{ this.state.sentence }</p>                   
+                      </a>
+                      <span>Source: <a href={ this.state.wikipedia[3]}>Wikipedia</a> </span>
+                    </div>          
                   </InfoWindow>
                   
                 </Map>
