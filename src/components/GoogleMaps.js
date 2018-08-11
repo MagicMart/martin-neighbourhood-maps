@@ -55,9 +55,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                 .then((array) => {
                     //Reduce Info text to first sentence
                if(array[0] === "") {this.setState({wikipedia: []}); return}
-                const text = array[2][0];
-                const point = text.indexOf('.')
-                const sentence =  text.slice(0, point + 1);
+                  const sentence =  array[2][0].slice(0, array[2][0].indexOf('.') + 1);
                   this.setState({wikipedia:array, sentence: sentence})
                 } )
                 .catch((error) => {
