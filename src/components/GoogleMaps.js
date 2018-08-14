@@ -54,16 +54,16 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                 return resp.json()})
                 .then((array) => {
                     //Reduce Info text to first sentence
-               if(array[0] === "") {this.setState({wikipedia: []}); return}
+                  if(array[1].length === 0) {return Promise.reject("Couldn't find any information for this on Wikipedia")}
                   const sentence =  array[2][0].slice(0, array[2][0].indexOf('.') + 1);
                   this.setState({wikipedia:array, sentence: sentence})
                 } )
                 .catch((error) => {
                   let wikipedia = [];
-                  wikipedia[1] = "Something went wrong... ";
-                  wikipedia[2] = error.statusText;
-                  wikipedia[3] = "is not available";
-                  this.setState({wikipedia: wikipedia, sidebarInfo: true})})
+                  wikipedia[1] = "Sorry... ";
+                  wikipedia[2] = error;
+                  wikipedia[3] = [];
+                  this.setState({wikipedia: wikipedia, sentence: error})})
             }
 
             // Make only chosen marker visiible
@@ -183,7 +183,8 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
                           <h2>{this.state.selectedPlace.name}</h2>
                           <p>{ this.state.sentence }</p>                   
                       </a>
-                      <span>Source: <a href={ this.state.wikipedia[3]}>Wikipedia</a> </span>
+                      {this.state.wikipedia[1] !== "Sorry... " && <span>Source: <a href={ this.state.wikipedia[3]}>Wikipedia</a> </span>}
+                      
                     </div>          
                   </InfoWindow>
                   
