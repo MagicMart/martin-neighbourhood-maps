@@ -1,19 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class Hamburger extends Component {
-  render () {
+  render() {
     return (
-
-      <div id="hamburger-bar" >
-          <div className="bap" onClick={this.props.hamburgerClick} role="navigation">
-            <div className="hamburger"></div>
-            <div className="hamburger"></div>
-            <div className="hamburger"></div>
-          </div>
+      <div id="hamburger-bar">
+        <div
+          className="bap"
+          onClick={this.props.hamburgerClick}
+          role="navigation"
+        >
+          <div className="hamburger" />
+          <div className="hamburger" />
+          <div className="hamburger" />
+        </div>
       </div>
-    )
+    );
   }
-
 }
 
-export default Hamburger
+export default Hamburger;
