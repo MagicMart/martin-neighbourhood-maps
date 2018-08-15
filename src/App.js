@@ -44,7 +44,8 @@ class App extends Component {
         animate: false
       }
     ],
-    deviceWidth: 0
+    deviceWidth: 0,
+    choice: "all"
   };
 
   componentDidMount() {
@@ -58,6 +59,7 @@ class App extends Component {
   // Call when the menu has changed
   updateMap = choice => {
     // Slide away sidebar when choice made
+    this.setState({choice});
     if (this.state.deviceWidth <= 500) {
       this.hamburgerClick();
     }

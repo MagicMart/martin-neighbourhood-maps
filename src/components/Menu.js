@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 
 class Menu extends Component {
 
-    state = {
-        choice: "all"
-    }
+    // state = {
+    //     choice: "all"
+    // }
 
     choiceMade = (e) => {
         const choice = e.target.value;
-        this.setState({choice});
+        //this.setState({choice});
+        this.props.update(choice);
     }
 
-    componentDidUpdate() {
-        this.props.update(this.state.choice);
-    }
+    // componentDidUpdate() {
+    //     this.props.update(this.state.choice);
+    // }
     
     render() { 
         const options = this.props.locations.map((loc) => {
