@@ -15,8 +15,8 @@ export class MapContainer extends Component {
     wikipedia: [],
     sentence: "",
     animateMarker: false,
-    locations: [],
-    markers: []
+    locations: []
+    //markers: []
   };
 
   componentDidMount() {

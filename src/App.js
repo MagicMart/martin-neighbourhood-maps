@@ -59,7 +59,7 @@ class App extends Component {
   // Call when the menu has changed
   updateMap = choice => {
     // Slide away sidebar when choice made
-    this.setState({choice});
+    this.setState({ choice });
     if (this.state.deviceWidth <= 500) {
       this.hamburgerClick();
     }
@@ -73,17 +73,18 @@ class App extends Component {
   };
 
   render() {
+    const { locations } = this.state;
     return (
-      <div>
+      <React.Fragment>
         <Hamburger hamburgerClick={this.hamburgerClick} />
         <div className="sidebar">
           <h1>Potteries Museums</h1>
-          <Menu update={this.updateMap} locations={this.state.locations} />
+          <Menu update={this.updateMap} locations={locations} />
         </div>
         <div id="map" role="application" aria-label="Google Maps">
-          <GoogleMaps places={this.state.locations} menu={this.state.choice} />
+          <GoogleMaps places={locations} menu={locations.choice} />
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
