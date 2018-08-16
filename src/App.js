@@ -45,12 +45,13 @@ class App extends Component {
       }
     ],
     deviceWidth: 0,
-    choice: "all"
+    choice: "all",
+    sidebar: "sidebar"
   };
 
   componentDidMount() {
-    const deviceWidth = window.screen.width;
-    this.setState({ deviceWidth });
+    // const deviceWidth = window.screen.width;
+    // this.setState({ deviceWidth });
     window.gm_authFailure = function() {
       alert("There was a problem loading Google Maps.");
     };
@@ -60,7 +61,7 @@ class App extends Component {
   updateMap = choice => {
     // Slide away sidebar when choice made
     this.setState({ choice });
-    if (this.state.deviceWidth <= 500) {
+    if (window.screen.width <= 500) {
       this.hamburgerClick();
     }
     console.log("Inside app", choice);
@@ -68,23 +69,26 @@ class App extends Component {
   };
 
   hamburgerClick = () => {
-    const sidebar = document.querySelector(".sidebar");
-    sidebar.classList.toggle("sidebar-in");
+    // const sidebar = document.querySelector(".sidebar");
+    // sidebar.classList.toggle("sidebar-in");
+    this.state.sidebar === "sidebar"
+      ? this.setState({ sidebar: "sidebar-in" })
+      : this.setState({ sidebar: "sidebar" });
   };
 
   render() {
     const { locations } = this.state;
     return (
-      <React.Fragment>
+      <div>
         <Hamburger hamburgerClick={this.hamburgerClick} />
-        <div className="sidebar">
+        <div className={this.state.sidebar}>
           <h1>Potteries Museums</h1>
           <Menu update={this.updateMap} locations={locations} />
         </div>
         <div id="map" role="application" aria-label="Google Maps">
           <GoogleMaps places={locations} menu={locations.choice} />
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }

@@ -7,8 +7,8 @@ export class MapContainer extends Component {
     activeMarker: { lat: 0, lng: 0 },
     selectedPlace: {},
     initialCenter: {
-      lat: `${this.props.places[0].position.lat}`,
-      lng: `${this.props.places[0].position.lng}`
+      lat: this.props.places[0].position.lat,
+      lng: this.props.places[0].position.lng
     },
     zoom: 12,
     center: {},
@@ -16,7 +16,6 @@ export class MapContainer extends Component {
     sentence: "",
     animateMarker: false,
     locations: []
-    //markers: []
   };
 
   componentDidMount() {
@@ -31,8 +30,6 @@ export class MapContainer extends Component {
       this.state.zoom !== 12 && this.onMapClicked();
       setTimeout(() => {
         const selected = this.state.locations.filter(loc => loc.name === menu);
-        // let i = [];
-        // this.state.locations.forEach((loc, index) => {if(loc.name === menu) {i.push(index)}});
         this.onMarkerClick(selected[0]);
       }, 1000);
     });
@@ -82,7 +79,6 @@ export class MapContainer extends Component {
     const update = this.state.locations.map(marker => {
       if (choice === marker.name) {
         marker.visible = true;
-        // marker.animate =true;
         return marker;
       }
       marker.visible = false;
@@ -117,8 +113,6 @@ export class MapContainer extends Component {
   };
 
   onMapClicked = props => {
-    // this.setState({animateMarker: false})
-    // document.querySelector('#menu').value==="all" && this.showAllMarkers();
     this.showAllMarkers();
     if (this.state.showingInfoWindow) {
       this.setState({

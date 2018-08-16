@@ -85,7 +85,6 @@ h1 {
 .sidebar {
   background: rgb(174, 192, 192);
   color: white;
-  /*border: 1px solid #999;*/
   border-radius: 3px;
   width: 300px;
   height: 100%;
@@ -136,9 +135,18 @@ h1 {
   }
 
   .sidebar-in {
+    z-index: 2;
     left: -400px;
+    transition: 0.4s;
+    background: rgb(174, 192, 192);
+    color: white;
+    border-radius: 3px;
+    height: 100%;
+    line-height: 35px;
+    padding: 10px 10px 30px 10px;
+    text-align: center;
+    position: absolute;
   }
-
 
   #map {
     width: 100%;
