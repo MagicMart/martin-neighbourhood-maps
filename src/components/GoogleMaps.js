@@ -14,25 +14,16 @@ export class MapContainer extends Component {
     center: {},
     wikipedia: [],
     sentence: "",
-    animateMarker: false,
-    locations: []
+    animateMarker: false
+    //locations: []
   };
 
   componentDidMount() {
-    const menu = document.querySelector("#menu");
+    // const menu = document.querySelector("#menu");
 
-    menu.addEventListener("change", () => {
-      const menu = document.querySelector("#menu").value;
-      if (menu === "all") {
-        this.onMapClicked();
-        return;
-      }
-      this.state.zoom !== 12 && this.onMapClicked();
-      setTimeout(() => {
-        const selected = this.state.locations.filter(loc => loc.name === menu);
-        this.onMarkerClick(selected[0]);
-      }, 1000);
-    });
+    // menu.addEventListener("change", () => {
+    //   const menu = document.querySelector("#menu").value;
+    // });
 
     // Close infowindow with esc key
     window.addEventListener("keyup", e => {
@@ -40,7 +31,24 @@ export class MapContainer extends Component {
         this.onMapClicked();
       }
     });
-    this.setState({ locations: this.props.places });
+    //this.setState({ locations: this.props.places });
+  }
+
+  componentDidUpdate(prevProps) {
+    const { choice } = this.props;
+    if (choice === prevProps.choice) {
+      return;
+    }
+    console.log("ComponentDidUpdate: ", choice);
+    if (choice === "all") {
+      this.onMapClicked();
+      return;
+    }
+    this.state.zoom !== 12 && this.onMapClicked();
+    setTimeout(() => {
+      const selected = this.props.places.filter(loc => loc.name === choice);
+      this.onMarkerClick(selected[0]);
+    }, 1000);
   }
 
   fetchWikipedia = choice => {
@@ -76,7 +84,7 @@ export class MapContainer extends Component {
   // Make only chosen marker visiible
 
   showTheMarker = choice => {
-    const update = this.state.locations.map(marker => {
+    const update = this.props.places.map(marker => {
       if (choice === marker.name) {
         marker.visible = true;
         return marker;
@@ -89,7 +97,7 @@ export class MapContainer extends Component {
   };
 
   showAllMarkers = () => {
-    const update = this.state.locations.map(marker => {
+    const update = this.props.places.map(marker => {
       marker.visible = true;
 
       return marker;
@@ -145,7 +153,7 @@ export class MapContainer extends Component {
 
   render() {
     const { google } = this.props;
-    const markers = this.state.locations.map(place => {
+    const markers = this.props.places.map(place => {
       return (
         <Marker
           visible={place.visible}

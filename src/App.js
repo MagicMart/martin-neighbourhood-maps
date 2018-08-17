@@ -36,12 +36,6 @@ class App extends Component {
         position: { lat: 53.0062435, lng: -2.1861088 },
         visible: true,
         animate: false
-      },
-      {
-        name: "World of Wedgwood",
-        position: { lat: 52.9519207, lng: -2.1707704 },
-        visible: true,
-        animate: false
       }
     ],
     deviceWidth: 0,
@@ -83,10 +77,18 @@ class App extends Component {
         <Hamburger hamburgerClick={this.hamburgerClick} />
         <div className={this.state.sidebar}>
           <h1>Potteries Museums</h1>
-          <Menu update={this.updateMap} locations={locations} />
+          <Menu
+            update={this.updateMap}
+            locations={locations}
+            choice={this.state.choice}
+          />
         </div>
         <div id="map" role="application" aria-label="Google Maps">
-          <GoogleMaps places={locations} menu={locations.choice} />
+          <GoogleMaps
+            places={locations}
+            menu={locations.choice}
+            choice={this.state.choice}
+          />
         </div>
       </div>
     );
