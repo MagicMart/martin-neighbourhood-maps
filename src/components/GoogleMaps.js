@@ -6,10 +6,10 @@ export class MapContainer extends Component {
     showingInfoWindow: false,
     activeMarker: { lat: 0, lng: 0 },
     selectedPlace: {},
-    initialCenter: {
-      lat: this.props.places[0].position.lat,
-      lng: this.props.places[0].position.lng
-    },
+    // initialCenter: {
+    //   lat: this.props.places[0].position.lat,
+    //   lng: this.props.places[0].position.lng
+    // },
     zoom: 12,
     center: {},
     wikipedia: [],
@@ -93,7 +93,7 @@ export class MapContainer extends Component {
       return marker;
     });
 
-    this.setState({ locations: update });
+    //this.setState({ locations: update });
   };
 
   showAllMarkers = () => {
@@ -102,7 +102,7 @@ export class MapContainer extends Component {
 
       return marker;
     });
-    this.setState({ locations: update });
+    //this.setState({ locations: update });
   };
 
   onMarkerClick = (props, marker, e) => {
@@ -184,7 +184,10 @@ export class MapContainer extends Component {
         // style={{width: '100%', height: '100%', position: 'absolute'}}
         google={this.props.google}
         onClick={this.onMapClicked}
-        initialCenter={this.state.initialCenter}
+        initialCenter={{
+          lat: this.props.places[0].position.lat,
+          lng: this.props.places[0].position.lng
+        }}
         center={this.state.center}
         zoom={this.state.zoom}
       >

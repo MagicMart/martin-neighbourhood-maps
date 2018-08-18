@@ -86,7 +86,7 @@ class App extends Component {
         <div id="map" role="application" aria-label="Google Maps">
           <GoogleMaps
             places={locations}
-            menu={locations.choice}
+            //menu={locations.choice}
             choice={this.state.choice}
           />
         </div>
