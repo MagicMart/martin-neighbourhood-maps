@@ -38,7 +38,6 @@ class App extends Component {
         animate: false
       }
     ],
-    deviceWidth: 0,
     choice: "all",
     sidebar: "sidebar"
   };
@@ -54,20 +53,22 @@ class App extends Component {
   // Call when the menu has changed
   updateMap = choice => {
     // Slide away sidebar when choice made
-    this.setState({ choice });
+    this.setState(() => {
+      return { choice };
+    });
     if (window.screen.width <= 500) {
       this.hamburgerClick();
     }
-    console.log("Inside app", choice);
-    // this.state.choice !== choice && this.setState({choice})
   };
 
   hamburgerClick = () => {
-    // const sidebar = document.querySelector(".sidebar");
-    // sidebar.classList.toggle("sidebar-in");
     this.state.sidebar === "sidebar"
-      ? this.setState({ sidebar: "sidebar-in" })
-      : this.setState({ sidebar: "sidebar" });
+      ? this.setState(() => {
+          return { sidebar: "sidebar-in" };
+        })
+      : this.setState(() => {
+          return { sidebar: "sidebar" };
+        });
   };
 
   render() {

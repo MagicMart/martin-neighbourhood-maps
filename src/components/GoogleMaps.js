@@ -106,27 +106,32 @@ export class MapContainer extends Component {
   };
 
   onMarkerClick = (props, marker, e) => {
-    this.showTheMarker(props.name);
+    const { name, position } = props;
+    this.showTheMarker(name);
 
-    this.fetchWikipedia(props.name);
-    this.setState({
-      animateMarker: true,
-      selectedPlace: props,
-      activeMarker: props.position,
-      showingInfoWindow: true,
-      zoom: 13,
-      initialCenter: props.position,
-      center: props.position
+    this.fetchWikipedia(name);
+    this.setState(() => {
+      return {
+        animateMarker: true,
+        selectedPlace: props,
+        activeMarker: position,
+        showingInfoWindow: true,
+        zoom: 13,
+        initialCenter: position,
+        center: position
+      };
     });
   };
 
   onMapClicked = props => {
     this.showAllMarkers();
     if (this.state.showingInfoWindow) {
-      this.setState({
-        animateMarker: false,
-        showingInfoWindow: false,
-        activeMarker: null
+      this.setState(() => {
+        return {
+          animateMarker: false,
+          showingInfoWindow: false,
+          activeMarker: null
+        };
       });
     }
     if (
@@ -137,12 +142,14 @@ export class MapContainer extends Component {
           lng: `${this.props.places[0].position.lng}`
         }
     )
-      this.setState({
-        zoom: 12,
-        center: {
-          lat: `${this.props.places[0].position.lat}`,
-          lng: `${this.props.places[0].position.lng}`
-        }
+      this.setState(() => {
+        return {
+          zoom: 12,
+          center: {
+            lat: `${this.props.places[0].position.lat}`,
+            lng: `${this.props.places[0].position.lng}`
+          }
+        };
       });
   };
 
