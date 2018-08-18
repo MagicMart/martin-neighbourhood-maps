@@ -76,10 +76,11 @@ h1 {
   bottom: 0px;
   width: 75%;
   max-width: 724px;
-  height: 93%;
+  /* height: 100vh; */
   /*left: 362px;*/
   position: absolute;
   left: 300px;
+  top: 48px;
 }
 
 .sidebar {
@@ -123,7 +124,7 @@ h1 {
   position: fixed;
   width: 100%;
   max-width: 1024px;
-  height: 7%;
+  height: 55px;
   background: rgb(35, 206, 206);
 }
 
@@ -152,15 +153,16 @@ h1 {
     width: 100%;
     left: 0;
   }
-  .hamburger {
+  /* .hamburger {
     display: block;
     height: 5px;
     width: 40px;
     background-color: black;
     margin: 6px 0;
-  }
+  } */
   .bap {
     float: right;
+    max-height: 48px;
     padding-right: 8px;
   }
 }
