@@ -53,9 +53,7 @@ class App extends Component {
   // Call when the menu has changed
   updateMap = choice => {
     // Slide away sidebar when choice made
-    this.setState(() => {
-      return { choice };
-    });
+    this.setState({ choice });
     if (window.screen.width <= 500) {
       this.hamburgerClick();
     }
@@ -63,12 +61,8 @@ class App extends Component {
 
   hamburgerClick = () => {
     this.state.sidebar === "sidebar"
-      ? this.setState(() => {
-          return { sidebar: "sidebar-in" };
-        })
-      : this.setState(() => {
-          return { sidebar: "sidebar" };
-        });
+      ? this.setState({ sidebar: "sidebar-in" })
+      : this.setState({ sidebar: "sidebar" });
   };
 
   render() {

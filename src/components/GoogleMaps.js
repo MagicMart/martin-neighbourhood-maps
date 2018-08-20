@@ -110,28 +110,24 @@ export class MapContainer extends Component {
     this.showTheMarker(name);
 
     this.fetchWikipedia(name);
-    this.setState(() => {
-      return {
-        animateMarker: true,
-        selectedPlace: props,
-        activeMarker: position,
-        showingInfoWindow: true,
-        zoom: 13,
-        initialCenter: position,
-        center: position
-      };
+    this.setState({
+      animateMarker: true,
+      selectedPlace: props,
+      activeMarker: position,
+      showingInfoWindow: true,
+      zoom: 13,
+      initialCenter: position,
+      center: position
     });
   };
 
   onMapClicked = props => {
     this.showAllMarkers();
     if (this.state.showingInfoWindow) {
-      this.setState(() => {
-        return {
-          animateMarker: false,
-          showingInfoWindow: false,
-          activeMarker: null
-        };
+      this.setState({
+        animateMarker: false,
+        showingInfoWindow: false,
+        activeMarker: null
       });
     }
     if (
