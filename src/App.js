@@ -68,7 +68,7 @@ class App extends Component {
   render() {
     const { locations } = this.state;
     return (
-      <div>
+      <div className="container">
         <Hamburger hamburgerClick={this.hamburgerClick} />
         <div className={this.state.sidebar}>
           <h1>Potteries Museums</h1>

@@ -22,17 +22,19 @@ html {
 }
 
 #root {
-  background: rgb(174, 192, 192);
+  background: rgba(142, 219, 17, 0.35);
   height: 100%;
 }
 
-/* .container {
+.container {
+  margin: 0 auto;
+  position: relative;
   max-width: 1024px;
-  display: flex;
-  flex-wrap: wrap;
+  /* display: flex;
+  flex-wrap: wrap; */
   height: 100vh;
   padding: 0;
-} */
+}
 
 /* input {
   font-size: 14px;
@@ -131,7 +133,7 @@ h1 {
 @media screen and (max-width: 500px) {
   .sidebar {
     z-index: 2;
-    width: 85%;
+    width: 80%;
     transition: 0.4s;
   }
 
