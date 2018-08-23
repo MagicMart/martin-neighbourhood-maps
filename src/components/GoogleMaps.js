@@ -4,7 +4,7 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 export class MapContainer extends Component {
   state = {
     showingInfoWindow: false,
-    activeMarker: { lat: 0, lng: 0 },
+    activeMarker: null,
     selectedPlace: {},
     // initialCenter: {
     //   lat: this.props.places[0].position.lat,
@@ -83,20 +83,21 @@ export class MapContainer extends Component {
 
   // Make only chosen marker visiible
 
-  showTheMarker = choice => {
-    this.props.places
-      .filter(marker => choice !== marker.name)
-      .map(marker => (marker.visible = false));
-  };
+  // showTheMarker = choice => {
+  //   const places = this.props.places.map(place => Object.assign({}, place));
+  //   places
+  //     .filter(marker => choice !== marker.name)
+  //     .map(marker => (marker.visible = false));
+  // };
 
-  showAllMarkers = () => {
-    this.props.places.map(marker => (marker.visible = true));
-  };
+  // showAllMarkers = () => {
+  //   this.props.places.map(marker => (marker.visible = true));
+  // };
 
   onMarkerClick = (props, marker, e) => {
     console.log("Before", props);
     const { name, position } = props;
-    this.showTheMarker(name);
+    // this.showTheMarker(name);
 
     this.fetchWikipedia(name);
     this.setState({
@@ -111,7 +112,7 @@ export class MapContainer extends Component {
   };
 
   onMapClicked = props => {
-    this.showAllMarkers();
+    // this.showAllMarkers();
     if (this.state.showingInfoWindow) {
       this.setState({
         animateMarker: false,
@@ -148,7 +149,10 @@ export class MapContainer extends Component {
     const markers = this.props.places.map(place => {
       return (
         <Marker
-          visible={place.visible}
+          visible={
+            !this.state.activeMarker ||
+            place.name === this.state.selectedPlace.name
+          }
           onClick={this.onMarkerClick}
           name={place.name}
           key={place.name}
