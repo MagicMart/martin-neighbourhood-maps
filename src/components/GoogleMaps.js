@@ -84,28 +84,17 @@ export class MapContainer extends Component {
   // Make only chosen marker visiible
 
   showTheMarker = choice => {
-    const update = this.props.places.map(marker => {
-      if (choice === marker.name) {
-        marker.visible = true;
-        return marker;
-      }
-      marker.visible = false;
-      return marker;
-    });
-
-    //this.setState({ locations: update });
+    this.props.places
+      .filter(marker => choice !== marker.name)
+      .map(marker => (marker.visible = false));
   };
 
   showAllMarkers = () => {
-    const update = this.props.places.map(marker => {
-      marker.visible = true;
-
-      return marker;
-    });
-    //this.setState({ locations: update });
+    this.props.places.map(marker => (marker.visible = true));
   };
 
   onMarkerClick = (props, marker, e) => {
+    console.log("Before", props);
     const { name, position } = props;
     this.showTheMarker(name);
 
