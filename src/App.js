@@ -60,9 +60,9 @@ class App extends Component {
   };
 
   hamburgerClick = () => {
-    this.state.sidebar === "sidebar"
-      ? this.setState({ sidebar: "sidebar-in" })
-      : this.setState({ sidebar: "sidebar" });
+    this.setState(prevState => ({
+      sidebar: prevState.sidebar === "sidebar" ? "sidebar-in" : "sidebar"
+    }));
   };
 
   render() {
