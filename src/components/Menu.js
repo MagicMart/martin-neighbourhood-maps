@@ -22,7 +22,7 @@ class Menu extends Component {
           value={this.props.choice}
           tabIndex="0"
         >
-          <option value="all">All Museums</option>
+          <option value="all">All Places</option>
           {options}
         </select>
       </div>

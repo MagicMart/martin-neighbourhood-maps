@@ -21,21 +21,21 @@ class App extends Component {
       },
       {
         name: "Middleport Pottery",
-        position: { lat: 53.0412292, lng: -2.2119407 },
+        position: { lat: 53.0412825, lng: -2.2096095 },
         visible: true,
         animate: false
       },
       {
         name: "Etruria Industrial Museum",
-        position: { lat: 53.0191846, lng: -2.1942034 },
+        position: { lat: 53.0191733, lng: -2.1921499 },
         visible: true,
         animate: false
       },
       {
-        name: "Spode Museum",
-        position: { lat: 53.0062435, lng: -2.1861088 },
-        visible: true,
-        animate: false
+        name: "Chatterley Whitfield",
+        position: { lat: 53.0764, lng: -2.1752 }
+        // visible: true,
+        // animate: false
       }
     ],
     choice: "all",
@@ -71,7 +71,7 @@ class App extends Component {
       <div className="container">
         <Hamburger hamburgerClick={this.hamburgerClick} />
         <div className={this.state.sidebar}>
-          <h1>Potteries Museums</h1>
+          <h1>Potteries Places</h1>
           <Menu
             update={this.updateMap}
             locations={locations}

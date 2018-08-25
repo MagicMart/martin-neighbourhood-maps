@@ -44,7 +44,7 @@ export class MapContainer extends Component {
       this.onMapClicked();
       return;
     }
-    this.state.zoom !== 12 && this.onMapClicked();
+    this.state.activeMarker && this.onMapClicked();
     setTimeout(() => {
       const selected = this.props.places.filter(loc => loc.name === choice);
       this.onMarkerClick(selected[0]);
