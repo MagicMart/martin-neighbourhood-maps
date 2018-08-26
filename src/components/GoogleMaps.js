@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import PropTypes from "prop-types";
 
 export class MapContainer extends Component {
   state = {
@@ -10,7 +11,7 @@ export class MapContainer extends Component {
     //   lat: this.props.places[0].position.lat,
     //   lng: this.props.places[0].position.lng
     // },
-    zoom: 12,
+    zoom: 11,
     center: {},
     wikipedia: [],
     sentence: "",
@@ -121,7 +122,7 @@ export class MapContainer extends Component {
       });
     }
     if (
-      this.state.zoom !== 12 &&
+      this.state.zoom !== 11 &&
       this.state.center !==
         {
           lat: `${this.props.places[0].position.lat}`,
@@ -130,7 +131,7 @@ export class MapContainer extends Component {
     )
       this.setState(() => {
         return {
-          zoom: 12,
+          zoom: 11,
           center: {
             lat: `${this.props.places[0].position.lat}`,
             lng: `${this.props.places[0].position.lng}`
@@ -218,6 +219,11 @@ export class MapContainer extends Component {
     );
   }
 }
+
+MapContainer.propTypes = {
+  places: PropTypes.array.isRequired,
+  choice: PropTypes.string.isRequired
+};
 
 export default GoogleApiWrapper({
   apiKey: "AIzaSyDBE2r_7RpfEqvgqfHt-qTWMpZ94i3huGQ"

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import hamburger from "../hamburger.svg";
+import PropTypes from "prop-types";
 
 function Hamburger(props) {
   const style = {
@@ -19,5 +20,9 @@ function Hamburger(props) {
     </div>
   );
 }
+
+Hamburger.propTypes = {
+  hamburgerClick: PropTypes.func.isRequired
+};
 
 export default Hamburger;

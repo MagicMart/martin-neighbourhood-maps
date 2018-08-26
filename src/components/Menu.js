@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class Menu extends Component {
   choiceMade = e => {
@@ -29,4 +30,11 @@ class Menu extends Component {
     );
   }
 }
+
+Menu.propTypes = {
+  locations: PropTypes.array.isRequired,
+  update: PropTypes.func.isRequired,
+  choice: PropTypes.string.isRequired
+};
+
 export default Menu;
