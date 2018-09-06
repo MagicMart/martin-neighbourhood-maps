@@ -162,13 +162,13 @@ export class MapContainer extends Component {
           }
           position={{ lat: place.position.lat, lng: place.position.lng }}
           icon={{
-            // url: "https://maps.google.com/mapfiles/kml/shapes/info-i_maps.png",
-            //  anchor: new google.maps.Point(32,16),
-            //  scaledSize: new google.maps.Size(64,64)
-            path: google.maps.SymbolPath.CIRCLE,
-            scale: 10,
-            strokeColor: "red",
-            strokeOpacity: 0.6
+            url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+            anchor: new google.maps.Point(24, 24),
+            scaledSize: new google.maps.Size(48, 48)
+            // path: google.maps.SymbolPath.CIRCLE,
+            // scale: 10,
+            // strokeColor: "red",
+            // strokeOpacity: 0.6
             // fillColor: "rgb(26,13,171)",
             // fillOpacity: 0.6,
           }}
