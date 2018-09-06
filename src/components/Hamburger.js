@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import hamburger from "../hamburger.svg";
 import PropTypes from "prop-types";
 
@@ -12,10 +12,7 @@ function Hamburger(props) {
   return (
     <div id="hamburger-bar">
       <div className="bap" onClick={props.hamburgerClick} role="navigation">
-        {/* <div className="hamburger" />
-        <div className="hamburger" />
-        <div className="hamburger" /> */}
-        <img src={hamburger} style={style} />
+        <img src={hamburger} alt="menu" style={style} />
       </div>
     </div>
   );
